@@ -1,3 +1,247 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base{
+    @font-face {
+    font-family: "iran-sans";
+    src: url(./fonts/IRANSans/IRANSans.ttf) format("truetype");
+}
+    @font-face {
+    font-family: "iran-sans-black";
+    src: url(./fonts/IRANSans/IRANSans_Black.ttf) format("truetype");
+}
+    @font-face {
+    font-family: "iran-sans-bold";
+    src: url(./fonts/IRANSans/IRANSans_Bold.ttf) format("truetype");
+}
+    @font-face {
+    font-family: "iran-sans-light";
+    src: url(./fonts/IRANSans/IRANSans_Light.ttf) format("truetype");
+}
+    @font-face {
+    font-family: "iran-sans-medium";
+    src: url(./fonts/IRANSans/IRANSans_Medium.ttf) format("truetype");
+}
+    @font-face {
+    font-family: "iran-sans-ultraLight";
+    src: url(./fonts/IRANSans/IRANSans_UltraLight.ttf) format("truetype");
+}
+html {
+  font-size: 62.5%;
+}
+
+body {
+  line-height: 1.6;
+  font-size: 1.6rem;
+  direction: rtl;
+  @apply font-iranSans
+  
+}
+
+*,
+*::after,
+*::before {
+  outline: none;
+  box-sizing: inherit;
+}
+
+a {
+  transition: all 400ms ease;
+  @apply text-dark-sabzlearn
+  
+}
+
+a:hover {
+  color: #1e83f0;
+}
+
+i {
+  user-select: none;
+}
+}
+@layer utilities{
+    .flex-center{
+        @apply flex items-center justify-center
+    }
+    .title {
+    font-size: 2.3rem;
+    color: #444446;
+    font-weight: bold;
+    line-height: 1.2;
+    position: relative;
+  }
+  
+  .title::before {
+    content: "";
+    position: absolute;
+    right: -1rem;
+    width: 0.4rem;
+    height: 4.4rem;
+    border-radius: 5rem;
+    transform: rotate(8deg);
+    @apply bg-green-sabzlearn
+  }
+  
+  .title::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    /* max-width: 250px; */
+    height: 60%;
+    background-color: rgba(43, 206, 86, 0.2);
+  }
+  /* Start Top-Bar Styles */
+
+.top-bar {
+    padding: 2rem 0;
+    background-color: #f0f2f7;
+    @apply text-dark-sabzlearn
+  }
+  
+  .top-bar__content {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1.5rem;
+  }
+  
+  .top-bar__right {
+    display: flex;
+  }
+  
+  .top-bar__menu {
+    display: flex;
+  }
+  
+  .top-bar__link {
+    transition: all 400ms ease;
+    font-size: 1.5rem;
+    padding: 0 1rem;
+    @apply text-dark-sabzlearn
+  }
+  
+  .top-bar__left {
+    display: flex;
+  }
+  
+  .top-bar__email,
+  .top-bar__phone {
+    display: flex;
+    align-items: center;
+  }
+  
+  .top-bar__email-text, 
+  .top-bar__phone-text {
+    padding: 0 0.8rem;
+  }
+  
+  .top-bar__email-icon,
+  .top-bar__phone-icon {
+    font-size: 2rem;
+    @apply text-green-sabzlearn
+  }
+  
+  /* Finish Top-Bar Styles */
+
+  /* Start Navbar Styles */
+
+.main-header__content {
+  @apply flex items-center justify-between py-5 px-[1.5rem]
+}
+
+.main-header__right {
+   @apply flex
+}
+
+.main-header__menu {
+   @apply flex
+}
+
+.main-header__item {
+   @apply flex-center relative py-0 py-[1rem]
+
+}
+
+.main-header__link {
+  @apply flex-center relative text-[#7f8187]
+  
+}
+
+.main-header__link:hover {
+  @apply text-[#7f8187]
+}
+
+.main-header__link-icon {
+  @apply mr-[1rem]
+}
+
+/* Start DropDown Styles */
+
+.main-header__dropdown {
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.12);
+  @apply absolute top-[5.5rem] left-0 right-0 py-[10px] px-0 bg-white w-6 z-[1] rounded-[.5rem] border-b-[3px] border-green-sabzlearn opacity-0 invisible
+}
+
+.main-header__item:hover .main-header__dropdown {
+  @apply opacity-100 visible top-[6.5rem]
+}
+
+.main-header__dropdown-link {
+  transition: all 400ms ease;
+  @apply block py-[.6rem] px-5 text-dark-sabzlearn
+}
+
+.main-header__dropdown-link:hover {
+  color: #1e83f0;
+}
+
+/* Finish DropDown Styles */
+
+.main-header__left {
+  @apply flex items-center
+}
+
+.main-header__search-btn {
+  @apply flex-center w-[4.3rem]  h-[4.3rem] rounded-[.5rem] bg-green-sabzlearn
+}
+
+.main-header__search-icon {
+  @apply text-white text-[2.2rem]
+}
+
+.main-header__cart-btn {
+  
+  border-radius: 0.5rem;
+  margin-right: 1rem;
+  background-color: #f0f2f7;
+  @apply flex-center w-[4.3rem]  h-[4.3rem]
+}
+
+.main-header__cart-btn:hover {
+  color: #1e83f0;
+}
+
+.main-header__cart-icon {
+  @apply text-dark-sabzlearn;
+  font-size: 2.2rem;
+  transition: all 400ms ease;
+}
+
+.main-header__profile {
+  padding: 0 1.5rem;
+  border-radius: 0.5rem;
+  margin-right: 1rem;
+  transition: all 400ms ease;
+  height: 4.3rem;
+  @apply flex items-center text-green-sabzlearn border-[2px] border-green-sabzlearn
+}
+
+.main-header__profile:hover {
+  @apply bg-green-sabzlearn text-white
+}
+
+/* Finish Navbar Styles */
+  
+}
