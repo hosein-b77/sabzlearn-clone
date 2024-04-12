@@ -152,11 +152,11 @@ i {
 }
 
 .main-header__right {
-   @apply flex
+   @apply flex gap-x-10
 }
 
 .main-header__menu {
-   @apply flex
+   @apply flex gap-x-10
 }
 
 .main-header__item {
@@ -181,7 +181,7 @@ i {
 
 .main-header__dropdown {
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.12);
-  @apply absolute top-[5.5rem] left-0 right-0 py-[10px] px-0 bg-white w-6 z-[1] rounded-[.5rem] border-b-[3px] border-green-sabzlearn opacity-0 invisible
+  @apply absolute top-[5.5rem] left-0 right-0 py-[10px] px-0 bg-white w-80 z-[1] rounded-[.5rem] border-b-[3px] border-green-sabzlearn opacity-0 invisible
 }
 
 .main-header__item:hover .main-header__dropdown {
