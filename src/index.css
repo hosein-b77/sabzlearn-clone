@@ -96,9 +96,8 @@ i {
   /* Start Top-Bar Styles */
 
 .top-bar {
-    padding: 2rem 0;
     background-color: #f0f2f7;
-    @apply text-dark-sabzlearn
+    @apply text-dark-sabzlearn py-8
   }
   
   .top-bar__content {
@@ -272,6 +271,7 @@ i {
   padding: 2.5rem;
   border: none;
   border-radius: 1rem;
+  color: black;
 }
 input.landing__searchbar-input::placeholder{
   @apply text-black

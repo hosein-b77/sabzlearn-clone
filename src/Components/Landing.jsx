@@ -1,12 +1,29 @@
 import React from 'react'
-
+import TypeWriter from 'typewriter-effect';
 export default function Landing() {
     return (
 
 
         <section class="landing">
             <div class="container">
-                <h1 class="landing__title">ما به هر قیمتی دوره آموزشی تولید نمی کنیم !</h1>
+                <h1 class="landing__title">
+                    <TypeWriter
+                        onInit={(typeWriter) => {
+                            typeWriter
+                                .typeString("ما به هر قیمتی دوره آموزشی تولید نمی کنیم !")
+                                .start()
+                                .pauseFor(2000)
+                                .deleteAll()
+                                .typeString("سبزلرن - آکادمی خصوصی برنامه نویسی")
+                                .start()
+                                .pauseFor(2500)
+
+                        }
+
+                        }
+                        options={{ loop: true }}
+                    />
+                </h1>
                 <h2 class="landing__subtitle">با آکادمی سبزلرن، برنامه نویسی رو با خیال راحت یاد بگیر و پیشرفت کن.
                 </h2>
                 <div class="landing__searchbar">
