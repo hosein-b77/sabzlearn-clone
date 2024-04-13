@@ -243,5 +243,69 @@ i {
 }
 
 /* Finish Navbar Styles */
-  
+
+  /* Start landing Styles */
+
+.landing {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../public/images/background_landing.jfif) no-repeat center center;
+  @apply bg-cover bg-fixed text-center py-36 px-0 text-white
+}
+
+.landing__title {
+  font-size: 3.4rem;
+  font-weight: bold;
+}
+
+.landing__subtitle {
+  font-size: 1.8rem;
+  margin-top: 0.3rem;
+}
+
+.landing__searchbar {
+  width: 700px;
+  position: relative;
+  margin: 3.5rem auto;
+}
+
+.landing__searchbar-input {
+  width: 100%;
+  padding: 2.5rem;
+  border: none;
+  border-radius: 1rem;
+}
+input.landing__searchbar-input::placeholder{
+  @apply text-black
+}
+.landing__searchbar-btn {
+  @apply bg-green-sabzlearn border-0 absolute -left-12 w-24 top-[0.7rem] h-24 rounded-2xl;
+}
+
+.landing__searchbar-icon {
+  font-size: 2.8rem;
+  color: white;
+}
+
+.landing-status {
+  @apply flex justify-evenly items-center;
+}
+
+.landing-status__item {
+  @apply flex flex-col items-center justify-center;
+}
+
+.landing-status__item svg {
+  fill: white;
+}
+
+.landing-status__count {
+  font-weight: bold;
+  font-size: 2rem;
+  margin-top: 0.5rem;
+}
+
+.landing-status__text {
+  @apply font-bold
+}
+
+/* Finish landing Styles */
 }
