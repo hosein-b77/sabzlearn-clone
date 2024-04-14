@@ -475,4 +475,26 @@ input.landing__searchbar-input::placeholder{
 }
 
 /* Finish About Us Styles */
+
+/* Start Popular Courses Styles */
+.popular, .presell {
+  @apply my-20 mx-0
+}
+
+.popular__slider .course-box, .presell__slider .course-box {
+  margin: 0 1.3rem;
+  box-shadow: 0 0 10px rgba(168, 172, 185, 0.3);
+}
+
+.popular__slider .course-box:hover, .presell__slider .course-box {
+  @apply transform-none
+}
+
+.presell__slider, .popular__slider {
+  @apply my-16 mx-0 relative
+}
+
+/* Finish Popular Courses Styles */
+
+
 }
