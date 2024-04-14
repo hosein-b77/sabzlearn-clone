@@ -5,6 +5,7 @@ import LatestCourses from '../Components/LatestCourses'
 import AboutUs from '../Components/AboutUs'
 import PopularCourses from '../Components/PopularCourses'
 import PreSellCourses from '../Components/PreSellCourses'
+import LatestArticles from '../Components/LatestArticles'
 export default function index() {
   return (
     <>
@@ -14,6 +15,7 @@ export default function index() {
       <AboutUs/>
       <PopularCourses/>
       <PreSellCourses/>
+      <LatestArticles/>
     </>
   )
 }
