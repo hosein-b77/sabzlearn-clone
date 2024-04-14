@@ -308,4 +308,39 @@ input.landing__searchbar-input::placeholder{
 }
 
 /* Finish landing Styles */
+
+/* Start Lateset Courses Styles and Section header */
+
+.courses {
+  @apply mx-0 my-16;
+}
+
+.courses-header {
+  @apply flex item-center justify-between
+}
+
+.courses-header__right {
+  @apply flex flex-col;
+}
+
+.courses-header__text {
+  @apply text-[#9c9c9c] text-[1.5rem]
+}
+
+.courses-header__link {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  @apply flex-center text-white bg-green-sabzlearn
+}
+
+.courses-header__link:hover {
+  @apply tetx-white
+}
+
+.courses-header__icon {
+  margin-right: 0.5rem;
+  font-size: 1.5rem;
+}
+
+/* Finish Lateset Courses Styles */
 }
