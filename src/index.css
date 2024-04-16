@@ -901,11 +901,6 @@ input.landing__searchbar-input::placeholder{
 
 /* Finish Course boxes styles */
 
-/* Start Course Progress Styles */
-
-
-/* Finish Course Progress Styles */
-
 /* Start Introduction styles */
 
 .introduction {
@@ -915,7 +910,7 @@ input.landing__searchbar-input::placeholder{
 }
 
 .introduction__img {
-    margin-top: 3rem;
+    margin-top: 7rem;
     display: block;
     border-radius: 1rem;
 }
@@ -924,6 +919,7 @@ input.landing__searchbar-input::placeholder{
     margin-top: 2rem;
     color: #7a7a7a;
     font-size: 1.5rem;
+    margin-bottom: 6rem;
 }
 
 .introduction__btns {
@@ -1180,4 +1176,26 @@ input.landing__searchbar-input::placeholder{
 /* Finish Sidebar Styles */
 
 
+}
+
+@layer components{
+  /* start of progress bar style */
+  .progress{
+    @apply bg-slate-100 h-[6px] w-full rounded-[5px] p-2;
+  }
+  .fill{
+    background: linear-gradient(45deg,rgba(255,255,255,0.5) 25%,transparent 25%,transparent 50%,rgba(255,255,255,0.5) 50%,rgba(255,255,255,0.5) 75%,transparent 75%,transparent);
+    background-size:7px ;
+    border-radius: 5px;
+    animation: move 2s linear infinite;
+  }
+  @keyframes move {
+    100%{
+      background-position:  0px 40px;
+    }
+  }
+  .bar{
+    @apply bg-green-sabzlearn h-full;
+  }
+  /* end of progress bar style */
 }

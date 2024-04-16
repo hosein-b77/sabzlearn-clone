@@ -4,12 +4,12 @@ export default function MainInfoSection() {
     return (
         <main className="main">
             <div className="container">
-                <div className="grid grid-cols-12">
+                <div className="grid grid-cols-12  mt-20">
                     <div className="col-start-1 col-end-8">
                         <div className="course">
                             {/* <!-- Start Course Boxes --> */}
                             <div className="course-boxes">
-                                <div className="grid grid-cols-3">
+                                <div className="grid grid-cols-3 gap-x-10">
                                     <CourseBoxesItem title='وضعیت دوره:' txt='به اتمام رسیده' icon='course-boxes__box-right-icon fas fa-graduation-cap'/>
                                     <CourseBoxesItem title='مدت زمان دوره:' txt='19 ساعت' icon='course-boxes__box-right-icon fas fa-clock'/>
                                     <CourseBoxesItem title='آخرین بروزرسانی:' txt='1401/03/02' icon='course-boxes__box-right-icon fas fa-calendar-alt'/>
@@ -21,28 +21,27 @@ export default function MainInfoSection() {
                             {/* <!-- Finish Course Boxes -->
 
                           <!-- Start Course Progress --> */}
-                            <div className="course-progress">
+                            <div className="course-progress mt-10">
                                 <div className="course-progress__header">
                                     <i className="fas fa-chart-line course-progress__icon"></i>
                                     <span className="course-progress__title">
                                         درصد پیشرفت دوره: 100%
                                     </span>
                                 </div>
-                                {/* <div className="progress course-progress__bar">
-                                    <div className="progress-bar progress-bar-striped progress-bar-animated w-[75%]" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div> */}
-                                
+                                <div className='progress mt-14'>
+                                    <div className='fill bar w-[65%]'></div>
+                                </div>
                             </div>
                             {/* <!-- Finish Course Progress -->
 
                           <!-- Start Introduction --> */}
 
-                            <div className="introduction">
+                            <div className="introduction mt-20">
                                 <div className="introduction__item">
                                     <span className="introduction__title title">
                                         آموزش 20 کتابخانه جاوا اسکریپت مخصوص بازار کار
                                     </span>
-                                    <img src="/images/info/1.gif" alt="course info image" className="introduction__img img-fluid" />
+                                    <img src="/images/info/1.gif" alt="course info image" className=" introduction__img img-fluid" />
                                     <p className="introduction__text">
                                         کتابخانه های بسیار زیادی برای زبان جاوا اسکریپت وجود دارد و سالانه چندین کتابخانه جدید نیز به این لیست اضافه می شود که در بازار کار به شدت از آن ها استفاده می شود و اگر بدون بلد بودن این کتابخانه ها وارد بازار کار شوید، خیلی اذیت خواهید شد و حتی ممکن است ناامید شوید!
                                     </p>
@@ -70,8 +69,8 @@ export default function MainInfoSection() {
                                         در این دوره سعی کردیم علاوه بر آموزش مستقیم هر کتابخانه، نحوه یادگیری یک کتابخانه جدید را نیز به شما عزیزان آموزش دهیم تا بعد از گذراندن دوره، دیگر وابسته هیچ دوره یا شخص خاصی نباشید و اگر کتابخانه جدیدی به دنیای جاوا اسکریپت و وب اضافه شد، به راحتی بتوانید آن را یاد بگیرید.
                                     </p>
                                 </div>
-                                <div className="introduction__btns">
-                                    <a href="#" className="introduction__btns-item">دانلود همگانی ویدیوها</a>
+                                <div className="introduction__btns flex gap-x-5">
+                                    <a href="#" className="introduction__btns-item ">دانلود همگانی ویدیوها</a>
                                     <a href="#" className="introduction__btns-item">دانلود همگانی پیوست‌ها</a>
                                 </div>
 
@@ -159,7 +158,7 @@ export default function MainInfoSection() {
 
                           <!-- Start Teacher Details --> */}
 
-                            <div className="techer-details">
+                            <div className="techer-details mb-9">
                                 <div className="techer-details__header">
                                     <div className="techer-details__header-right">
                                         <img src="/images/info/teacher.jfif" alt="Teacher Profile" className="techer-details__header-img" />
@@ -198,7 +197,7 @@ export default function MainInfoSection() {
                             <div className="course-info">
                                 <div className="course-info__total">
                                     <div className="course-info__top">
-                                        <div className="course-info__total-sale">
+                                        <div className="course-info__total-sale w-full flex justify-evenly">
                                             <i className="fas fa-user-graduate course-info__total-sale-icon"></i>
                                             <span className="course-info__total-sale-text">
                                                 تعداد دانشجو :
@@ -224,7 +223,7 @@ export default function MainInfoSection() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="course-info">
+                            <div className="course-info mt-10">
                                 <div className="course-info__header-short-url">
                                     <i className="fas fa-link course-info__short-url-icon"></i>
                                     <span className="course-info__short-url-text">
@@ -241,15 +240,15 @@ export default function MainInfoSection() {
                                 </span>
                                 <span className="course-info__topic-text">
                                     برای مشاهده و یا دانلود دوره روی کلمه
-                                    <a href="#" className='text-blue font-bold'>
+                                    <a  href="#" className='text-blue font-bold mx-1'>
                                         لینک
                                     </a>
                                     کلیک کنید
                                 </span>
                             </div>
-                            <div className="course-info">
+                            <div className="course-info mt-5 ">
                                 <span className="course-info__courses-title">دوره های مرتبط</span>
-                                <ul className="course-info__courses-list">
+                                <ul className="course-info__courses-list space-y-10">
                                     <li className="course-info__courses-list-item">
                                         <a href="#" className="course-info__courses-link">
                                             <img src="/images/courses/js_project.png" alt="Course Cover" className="course-info__courses-img" />
