@@ -1,5 +1,6 @@
 import React from 'react'
 import CourseBoxesItem from './CourseBoxesItem'
+import CommentTextArea from '../Components/CommentTextArea'
 export default function MainInfoSection() {
     return (
         <main className="main">
@@ -180,6 +181,7 @@ export default function MainInfoSection() {
                             </div>
 
                             {/* <!-- Finish Teacher Details --> */}
+                            <CommentTextArea/>
 
                         </div>
                     </div>
