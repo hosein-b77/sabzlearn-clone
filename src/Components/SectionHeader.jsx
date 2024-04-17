@@ -1,6 +1,6 @@
 import React from 'react'
-
-export default function SectionHeader({ title, desc, btnTitle }) {
+import { Link } from 'react-router-dom'
+export default function SectionHeader({ title, desc, btnTitle, btnLink }) {
     return (
         <div class="courses-header">
             <div class="courses-header__right">
@@ -8,10 +8,10 @@ export default function SectionHeader({ title, desc, btnTitle }) {
                 <span class="courses-header__text">{desc}</span>
             </div>
             {btnTitle && <div class="courses-header__left">
-                <a href="#" class="courses-header__link">
+                <Link to={btnLink} class="courses-header__link">
                     {btnTitle}
                     <i class="fas fa-arrow-left courses-header__icon"></i>
-                </a>
+                </Link>
             </div>}
         </div>
     )

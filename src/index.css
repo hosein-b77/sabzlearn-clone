@@ -1400,12 +1400,12 @@ input.landing__searchbar-input::placeholder{
     position: absolute;
     width: 22px;
     height: 39px;
-    @apply bg-green-sabzlearn;
     border-top-left-radius: 8px;
     border-bottom-left-radius: 12px;
     right: -27px;
     top: -5px;
     transform: skewX(-10deg);
+    @apply bg-green-sabzlearn;
 }
 
 .sidebar-articles__list {
