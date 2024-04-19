@@ -1,13 +1,15 @@
 import React from 'react'
-
+import {Link} from 'react-router-dom'
 export default function NavBar() {
     return (
         <div className="main-header">
             <div className="container-fluid">
                 <div className="main-header__content">
                     <div className="main-header__right">
-                        <img src="/images/logo/Logo.png" className="main-header__logo" alt="لوگوی سبزلرن" />
+                    <Link to="/">
+                            <img src="/images/logo/Logo.png" className="main-header__logo" alt="لوگوی سبزلرن" />
 
+                    </Link>
                         <ul className="main-header__menu">
                             <li className="main-header__item">
                                 <a href="#" className="main-header__link">صفحه اصلی</a>

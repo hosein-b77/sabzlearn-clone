@@ -1,12 +1,21 @@
-import React from 'react'
-
+import React, { useState } from 'react'
+import ImageLoader from './ImageLoader'
 export default function CourseBox() {
+    const [showLoader, setShowLoader] = useState(true)
     return (
 
-        <div className="course-box">
+        <div className="course-box relative">
+            {
+                showLoader && <ImageLoader />
+            }
+
             <a href="#">
-                <img src="/images/courses/fareelancer.png" alt="Course img" className="course-box__img" />
+                <img onLoad={() => setShowLoader(false)} src="https://picsum.photos/260/150" alt="Course img" className="course-box__img" />
+
             </a>
+
+
+
             <div className="course-box__main">
                 <a href="#" className="course-box__title">دوره پروژه محور متخصص جنگو</a>
 
