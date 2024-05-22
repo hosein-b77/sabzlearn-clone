@@ -12,6 +12,6 @@ export default function LandingCount({ count }) {
         return () => clearInterval(interval) //this line is for cleanUp in React and prevent memory leak because in every render,new interval created and old one still remained 
     }, [counter])
     return (
-        <span class="landing-status__count">{counter}</span>
+        <span className="landing-status__count">{counter}</span>
     )
 }
