@@ -3,7 +3,11 @@ import { Link } from 'react-router-dom'
 import Footer from "../Components/Footer"
 import Header from '../Components/Header'
 import Input from "../Components/Input";
+import Buttons from "../Components/Buttons";
 export default function Login() {
+  const userLogin = () => {
+    console.log(' user logged in ;)')
+  }
   return (
     <>
       <Header />
@@ -39,10 +43,11 @@ export default function Login() {
               />
               <i className="login-form__password-icon fa fa-lock-open"></i>
             </div>
-            <button className="login-form__btn" type="submit">
+            <Buttons className="login-form__btn" type="submit" onClick={userLogin} disabled={false}>
               <i className="login-form__btn-icon fas fa-sign-out-alt"></i>
               <span className="login-form__btn-text">ورود</span>
-            </button>
+            </Buttons>
+    
             <div className="login-form__password-setting">
               <label className="login-form__password-remember">
                 <input className="login-form__password-checkbox" type="checkbox" />

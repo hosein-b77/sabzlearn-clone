@@ -3,7 +3,11 @@ import { Link } from "react-router-dom";
 import Footer from "../Components/Footer"
 import Header from '../Components/Header'
 import Input from "../Components/Input";
+import Buttons from "../Components/Buttons";
 export default function Register() {
+  const registerNewUser=()=>{
+    console.log('new user registered ;)')
+  }
   return (
     <>
       <Header />
@@ -44,10 +48,11 @@ export default function Register() {
               />
               <i className="login-form__password-icon fa fa-lock-open"></i>
             </div>
-            <button className="login-form__btn" type="submit">
+            <Buttons className="login-form__btn" type="submit" disabled={false} onClick={registerNewUser}>
               <i className="login-form__btn-icon fa fa-user-plus"></i>
               <span className="login-form__btn-text">عضویت</span>
-            </button>
+            </Buttons>
+            
           </form>
           <div className="login__des">
             <span className="login__des-title">سلام کاربر محترم:</span>
