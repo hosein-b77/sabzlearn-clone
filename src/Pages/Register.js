@@ -42,7 +42,7 @@ export default function Register() {
             <div className="login-form__password">
               <Input
                 className="login-form__password-input"
-                type="text"
+                type="password"
                 placeholder="رمز عبور"
                 element='input'
               />

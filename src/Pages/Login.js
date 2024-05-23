@@ -45,7 +45,7 @@ export default function Login() {
             <div className="login-form__password">
               <Input
                 className="login-form__password-input"
-                type="text"
+                type="password"
                 placeholder="رمز عبور"
                 element='input'
                 validations={[
