@@ -4,6 +4,8 @@ import Footer from "../Components/Footer"
 import Header from '../Components/Header'
 import Input from "../Components/Input";
 import Buttons from "../Components/Buttons";
+import { requiredValidator, minValidator, maxValidator, emailValidator } from '../validators/rules'
+
 export default function Login() {
   const userLogin = () => {
     console.log(' user logged in ;)')
@@ -31,6 +33,12 @@ export default function Login() {
                 type="text"
                 placeholder="نام کاربری یا آدرس ایمیل"
                 element='input'
+                // validations={[{ value: 'required' }, { value: 'min', min: 8 }, { value: 'max', max: 20 }]}
+                validations={[
+                  requiredValidator(),
+                  minValidator(8),
+                  maxValidator(20)
+                ]}
               />
               <i className="login-form__username-icon fa fa-user"></i>
             </div>
@@ -40,6 +48,11 @@ export default function Login() {
                 type="text"
                 placeholder="رمز عبور"
                 element='input'
+                validations={[
+                  requiredValidator(),
+                  minValidator(8),
+                  maxValidator(18)
+                ]}
               />
               <i className="login-form__password-icon fa fa-lock-open"></i>
             </div>
@@ -47,7 +60,7 @@ export default function Login() {
               <i className="login-form__btn-icon fas fa-sign-out-alt"></i>
               <span className="login-form__btn-text">ورود</span>
             </Buttons>
-    
+
             <div className="login-form__password-setting">
               <label className="login-form__password-remember">
                 <input className="login-form__password-checkbox" type="checkbox" />

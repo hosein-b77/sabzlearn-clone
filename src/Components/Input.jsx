@@ -1,5 +1,4 @@
 import React, { useReducer } from 'react'
-
 const inputReducer = (state, action) => {
     switch (action.type) {
         case 'CHANGE': {
