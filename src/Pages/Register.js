@@ -36,12 +36,31 @@ export default function Register() {
 
   const registerNewUser = (event) => {
     event.preventDefault();
-    console.log("User Register");
+
+    const body = {
+      'username': formState.inputs.username.value,
+      'email': formState.inputs.email.value,
+      'password': formState.inputs.password.value,
+      'confirmPassword': formState.inputs.password.value,
+      'name': formState.inputs.name.value,
+      'phone': ''
+
+    };
+
+    // Make the fetch request
+    fetch('http://localhost:4000/v1/auth/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error('Error:', error));
   };
 
   return (
     <>
-      <Header/>
+      <Header />
 
       <section className="login-register">
         <div className="login register-form">
@@ -128,7 +147,7 @@ export default function Register() {
                 }`}
               type="submit"
               onClick={registerNewUser}
-              disabled={false}
+              disabled={!formState.isFormValid}
             >
               <i className="login-form__btn-icon fa fa-user-plus"></i>
               <span className="login-form__btn-text">عضویت</span>
