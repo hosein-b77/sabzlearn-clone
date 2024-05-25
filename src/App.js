@@ -7,8 +7,10 @@ export default function App() {
   const [isLoggedIn,setIsLoggedIn]=useState(false)
   const [token,setToken]=useState(false)
   const [userInfos,setUserInfos]=useState({})
-  const login=(token)=>{
+  const login=(userInfos,token)=>{
     setToken(token)
+    setIsLoggedIn(true)
+    setUserInfos(userInfos)
     localStorage.setItem('user',JSON.stringify(token))
   }
   const logout=(token)=>{
