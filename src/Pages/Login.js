@@ -1,13 +1,16 @@
-import React,{useContext} from "react";
+import React, { useContext } from "react";
 import { Link } from 'react-router-dom'
 import Footer from "../Components/Footer"
 import Header from '../Components/Header'
 import Input from "../Components/Input";
 import Buttons from "../Components/Buttons";
-import { requiredValidator, minValidator, maxValidator, emailValidator } from '../validators/rules'
+import { requiredValidator, minValidator, maxValidator } from '../validators/rules'
 import { useForm } from "../hooks/useForm";
 import AuthContext from "../context/authContext";
+import swal from "sweetalert";
+import { useNavigate } from "react-router-dom";
 export default function Login() {
+  const navigate = useNavigate
   const authContext = useContext(AuthContext);
   const [formState, onInputHandler] = useForm({
     username: {
@@ -19,6 +22,7 @@ export default function Login() {
       isValid: false
     },
   }, false)
+
   const userLogin = (event) => {
     event.preventDefault();
 
@@ -34,7 +38,7 @@ export default function Login() {
       },
       body: JSON.stringify(userData),
     })
-      .then((res) => {
+      .then(res => {
         console.log(res);
         if (!res.ok) {
           return res.text().then((text) => {
@@ -45,12 +49,20 @@ export default function Login() {
         }
       })
       .then((result) => {
+        swal({
+          title: "با موفقیت لاگین شدید",
+          icon: "success",
+          buttons: 'ورود به پنل'
+        }).then(value => navigate('/'))
         console.log(result);
-        authContext.login({},result.accessToken)
+        authContext.login({}, result.accessToken)
       })
       .catch((err) => {
-        console.log(`err =>`, err);
-        alert('همچین کاربری وجود ندارد')
+        swal({
+          title: "چنین کاربری وجود ندارد",
+          icon: "error",
+          buttons: 'تلاش دوباره'
+        })
       });
 
     console.log(userData);
