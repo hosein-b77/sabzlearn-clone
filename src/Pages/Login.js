@@ -17,9 +17,41 @@ export default function Login() {
       isValid: false
     },
   }, false)
-  const userLogin = () => {
-    console.log(' user logged in ;)')
-  }
+  const userLogin = (event) => {
+    event.preventDefault();
+
+    const userData = {
+      identifier: formState.inputs.username.value,
+      password: formState.inputs.password.value,
+    };
+
+    fetch(`http://localhost:4000/v1/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    })
+      .then((res) => {
+        console.log(res);
+        if (!res.ok) {
+          return res.text().then((text) => {
+            throw new Error(text);
+          });
+        } else {
+          return res.json();
+        }
+      })
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(`err =>`, err);
+        alert('همچین کاربری وجود ندارد')
+      });
+
+    console.log(userData);
+  };
   return (
     <>
       <Header />
@@ -49,7 +81,7 @@ export default function Login() {
                   requiredValidator(),
                   minValidator(8),
                   maxValidator(20),
-                  emailValidator()
+                  // emailValidator()
                 ]}
                 onInputHandler={onInputHandler}
               />
