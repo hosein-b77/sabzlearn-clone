@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext,useState } from "react";
 import { Link } from 'react-router-dom'
 import Footer from "../Components/Footer"
 import Header from '../Components/Header'
@@ -9,9 +9,11 @@ import { useForm } from "../hooks/useForm";
 import AuthContext from "../context/authContext";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
+import ReCAPTCHA from "react-google-recaptcha";
 export default function Login() {
   const navigate = useNavigate
   const authContext = useContext(AuthContext);
+  const [isGoogleRecaptchaVerify, setIsGoogleRecaptchaVerify] = useState(false)
   const [formState, onInputHandler] = useForm({
     username: {
       value: '',
@@ -67,6 +69,10 @@ export default function Login() {
 
     console.log(userData);
   };
+  const onChangeHandler = () => {
+    console.log('گوگل ری‌کپچا وریفای شد`');
+    setIsGoogleRecaptchaVerify(true)
+  }
   return (
     <>
       <Header />
@@ -118,7 +124,10 @@ export default function Login() {
               />
               <i className="login-form__password-icon fa fa-lock-open"></i>
             </div>
-            <Buttons className={`login-form__btn ${formState.isFormValid ? 'bg-[#2bce56]' : '!bg-red-600'}`} type="submit" onClick={userLogin} disabled={!formState.isFormValid}>
+            <div className="login-form__password">
+              <ReCAPTCHA sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" onChange={onChangeHandler} />,
+            </div> {/*sitekey fake hast,dar site haye motabar aval bayad dar google ehraz hoviat kard ta sitekey motabar bede */}
+            <Buttons className={`login-form__btn ${(formState.isFormValid && isGoogleRecaptchaVerify) ? 'bg-[#2bce56]' : '!bg-red-600'}`} type="submit" onClick={userLogin} disabled={!formState.isFormValid && !isGoogleRecaptchaVerify}>
               <i className="login-form__btn-icon fas fa-sign-out-alt"></i>
               <span className="login-form__btn-text">ورود</span>
             </Buttons>
