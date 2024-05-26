@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useContext} from "react";
 import { Link } from 'react-router-dom'
 import Footer from "../Components/Footer"
 import Header from '../Components/Header'
@@ -6,7 +6,9 @@ import Input from "../Components/Input";
 import Buttons from "../Components/Buttons";
 import { requiredValidator, minValidator, maxValidator, emailValidator } from '../validators/rules'
 import { useForm } from "../hooks/useForm";
+import AuthContext from "../context/authContext";
 export default function Login() {
+  const authContext = useContext(AuthContext);
   const [formState, onInputHandler] = useForm({
     username: {
       value: '',
@@ -44,6 +46,7 @@ export default function Login() {
       })
       .then((result) => {
         console.log(result);
+        authContext.login({},result.accessToken)
       })
       .catch((err) => {
         console.log(`err =>`, err);
