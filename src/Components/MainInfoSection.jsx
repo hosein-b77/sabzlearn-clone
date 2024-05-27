@@ -1,7 +1,8 @@
 import React from 'react'
 import CourseBoxesItem from './CourseBoxesItem'
 import CommentTextArea from '../Components/CommentTextArea'
-export default function MainInfoSection() {
+import farsiDate from '../dateConvertor'
+export default function MainInfoSection({ isComplete, updatedAt, support, courseStudentCount, comments, sessions }) {
     return (
         <main className="main">
             <div className="container">
@@ -11,10 +12,10 @@ export default function MainInfoSection() {
                             {/* <!-- Start Course Boxes --> */}
                             <div className="course-boxes">
                                 <div className="grid grid-cols-3 gap-x-10">
-                                    <CourseBoxesItem title='وضعیت دوره:' txt='به اتمام رسیده' icon='course-boxes__box-right-icon fas fa-graduation-cap'/>
+                                    <CourseBoxesItem title='وضعیت دوره:' txt={isComplete?'به اتمام رسیده':'در حال برگزاری'} icon='course-boxes__box-right-icon fas fa-graduation-cap'/>
                                     <CourseBoxesItem title='مدت زمان دوره:' txt='19 ساعت' icon='course-boxes__box-right-icon fas fa-clock'/>
-                                    <CourseBoxesItem title='آخرین بروزرسانی:' txt='1401/03/02' icon='course-boxes__box-right-icon fas fa-calendar-alt'/>
-                                    <CourseBoxesItem title='روش پشتیبانی' txt='آنلاین' icon='course-boxes__box-right-icon fas fa-user-alt'/>
+                                    <CourseBoxesItem title='آخرین بروزرسانی:' txt={farsiDate(updatedAt)} icon='course-boxes__box-right-icon fas fa-calendar-alt'/>
+                                    <CourseBoxesItem title='روش پشتیبانی' txt={support} icon='course-boxes__box-right-icon fas fa-user-alt'/>
                                     <CourseBoxesItem title='پیش نیاز:' txt='HTML CSS' icon='course-boxes__box-right-icon fas fa-info-circle'/>
                                     <CourseBoxesItem title='نوع مشاهده:' txt='ضبط شده / آنلاین' icon='course-boxes__box-right-icon fas fa-play'/>
                                 </div>
@@ -205,7 +206,7 @@ export default function MainInfoSection() {
                                                 تعداد دانشجو :
                                             </span>
                                             <span className="course-info__total-sale-number">
-                                                178
+                                                {courseStudentCount}
                                             </span>
                                         </div>
                                     </div>
@@ -213,7 +214,7 @@ export default function MainInfoSection() {
                                         <div className="course-info__total-comment">
                                             <i className="far fa-comments course-info__total-comment-icon"></i>
                                             <span className="course-info__total-comment-text">
-                                                67 دیدگاه
+                                                {comments.length} دیدگاه
                                             </span>
                                         </div>
                                         <div className="course-info__total-view">

@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 export default function BreadCrumb({ links }) {
     return (
-        <section classNameName="breadcrumb">
+        <section className="breadcrumb">
             <div className="container">
                 <div className="breadcrumb__content">
                     <div className="breadcrumb__home-content-icon">
@@ -12,10 +12,10 @@ export default function BreadCrumb({ links }) {
                         {
                             links.map(link => {
                                 return (
-                                    <li className="breadcrumb__item" >
+                                    <li key={link.id} className="breadcrumb__item" >
                                         <Link to={link.to} className="breadcrumb__link">
                                             {link.title}
-                                            <i className="fas fa-angle-left breadcrumb__icon"></i>
+                                            {link.id !== 3 && <i className="fas fa-angle-left breadcrumb__icon"></i>}
                                         </Link>
                                     </li>
                                 )

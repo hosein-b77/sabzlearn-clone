@@ -10,10 +10,13 @@ export default function CourseInfo() {
     const [comments, setComments] = useState([])
     const [sessions, setSessions] = useState([])
     const [courseDetails, setCourseDetails] = useState({})
+
     useEffect(() => {
+        const localStorageData = JSON.parse(localStorage.getItem('user'))
         fetch(`http://localhost:4000/v1/courses/${courseName}`, {
             headers: {
-                'Authorization': `Bearer ${JSON.parse(localStorage.getItem('user')).token}`
+                'Authorization': `Bearer ${localStorageData === null ? null : localStorageData.token}`
+                //if user not login,site will not stop working
             }
         })
             .then(res => res.json())
@@ -28,16 +31,27 @@ export default function CourseInfo() {
     return (
         <>
             <Header />
-            <BreadCrumb links={[
-                { id: 1, title: "خانه", to: "/" },
-                { id: 2, title: "آموزش برنامه نویسی فرانت اند", to: "/category-info/frontend" },
-                { id: 3, title: "دوره متخصص جاوا اسکریپت", to: "/course-info/js-expert" }
-            ]}
-            />
+            {
+                console.log('courseDetails:::',courseDetails)
+            }
+            {Object.keys(courseDetails).length > 0 && (
+                <BreadCrumb links={[
+                    { id: 1, title: "خانه", to: "/" },
+                    { id: 2, title: `${courseDetails.categoryID.title}`, to: "/category-info/frontend" },
+                    { id: 3, title: `${courseDetails.name}`, to: "/course-info/js-expert" }
+                ]}
+                />
+            )}
+            
             {Object.keys(courseDetails).length > 0 && (
                 <CourseInfoMain coursesDetail={courseDetails} />
             )}
-            <MainInfoSection />
+
+            {Object.keys(courseDetails).length > 0 && (comments.length !== 0 && sessions.length!==0)&& (
+                <MainInfoSection comments={comments} sessions={sessions} courseStudentCount={courseDetails.courseStudentsCount} support={courseDetails.support} updatedAt={courseDetails.updatedAt} isComplete={courseDetails.isComplete} />
+            )}
+
+            
             <Footer />
         </>
     )
