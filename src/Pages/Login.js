@@ -124,8 +124,8 @@ export default function Login() {
               />
               <i className="login-form__password-icon fa fa-lock-open"></i>
             </div>
-            <div className="login-form__password">
-              <ReCAPTCHA sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" onChange={onChangeHandler} />,
+            <div className="login-form__password my-5">
+              <ReCAPTCHA sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" onChange={onChangeHandler} />
             </div> {/*sitekey fake hast,dar site haye motabar aval bayad dar google ehraz hoviat kard ta sitekey motabar bede */}
             <Buttons className={`login-form__btn ${(formState.isFormValid && isGoogleRecaptchaVerify) ? 'bg-[#2bce56]' : '!bg-red-600'}`} type="submit" onClick={userLogin} disabled={!formState.isFormValid && !isGoogleRecaptchaVerify}>
               <i className="login-form__btn-icon fas fa-sign-out-alt"></i>

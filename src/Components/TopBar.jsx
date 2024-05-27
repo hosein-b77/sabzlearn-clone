@@ -1,30 +1,38 @@
-import React from 'react'
+
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function TopBar() {
+    const [topbarLinks, setTopbarLinks] = useState(null);
+
+    useEffect(() => {
+        fetch('http://localhost:4000/v1/menus/topbar')
+            .then(res => res.json())
+            .then(data => setTopbarLinks(data));
+    }, []);
+
+    const randomLinks = (arr, randCount) => {
+        const shuffle = [...arr].sort(() => 0.5 - Math.random());
+        return shuffle.slice(0, randCount);
+    };
+
     return (
         <div className="top-bar">
             <div className="container-fluid">
                 <div className="top-bar__content">
                     <div className="top-bar__right">
                         <ul className="top-bar__menu">
-                            <li className="top-bar__item">
-                                <a href="#" className="top-bar__link">آموزش Html</a>
-                            </li>
-                            <li className="top-bar__item">
-                                <a href="#" className="top-bar__link">آموزش Css</a>
-                            </li>
-                            <li className="top-bar__item">
-                                <a href="#" className="top-bar__link">آموزش جاوا اسکریپت</a>
-                            </li>
-                            <li className="top-bar__item">
-                                <a href="#" className="top-bar__link">آموزش بوت استرپ</a>
-                            </li>
-                            <li className="top-bar__item">
-                                <a href="#" className="top-bar__link">آموزش پایتون</a>
-                            </li>
-                            <li className="top-bar__item">
-                                <a href="#" className="top-bar__link">آموزش ری‌اکت</a>
-                            </li>
+                            {
+                                topbarLinks ? (
+                                    randomLinks(topbarLinks, 5).map((link) => (
+                                        <li key={link._id} className="top-bar__item">
+                                            <Link to={link.href} className="top-bar__link">
+                                                {link.title}
+                                            </Link>
+                                        </li>
+                                    ))
+                                ) : ""
+                            }
                             <li className="top-bar__item">
                                 <a href="#" className="top-bar__link">20,000 تومان</a>
                             </li>
@@ -47,5 +55,5 @@ export default function TopBar() {
                 </div>
             </div>
         </div>
-    )
+    );
 }
