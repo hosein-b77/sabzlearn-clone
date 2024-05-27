@@ -164,10 +164,6 @@
     @apply flex-center relative text-[#7f8187];
   }
 
-  .main-header__link:hover {
-    @apply text-[#7f8187];
-  }
-
   .main-header__link-icon {
     @apply mr-[1rem];
   }
