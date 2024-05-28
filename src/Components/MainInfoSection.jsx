@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import CourseBoxesItem from './CourseBoxesItem'
 import CommentTextArea from '../Components/CommentTextArea'
 import farsiDate from '../dateConvertor'
-export default function MainInfoSection({ isComplete, updatedAt, support, courseStudentCount, comments, sessions }) {
+import AuthContext from '../context/authContext'
+import Accordion from './Accordion'
+export default function MainInfoSection({ isComplete, updatedAt, support, courseStudentCount, comments, sessions, isUserRegisteredToThisCourse }) {
+    const authContext = useContext(AuthContext);
     return (
         <main className="main">
             <div className="container">
@@ -12,12 +15,12 @@ export default function MainInfoSection({ isComplete, updatedAt, support, course
                             {/* <!-- Start Course Boxes --> */}
                             <div className="course-boxes">
                                 <div className="grid grid-cols-3 gap-x-10">
-                                    <CourseBoxesItem title='وضعیت دوره:' txt={isComplete?'به اتمام رسیده':'در حال برگزاری'} icon='course-boxes__box-right-icon fas fa-graduation-cap'/>
-                                    <CourseBoxesItem title='مدت زمان دوره:' txt='19 ساعت' icon='course-boxes__box-right-icon fas fa-clock'/>
-                                    <CourseBoxesItem title='آخرین بروزرسانی:' txt={farsiDate(updatedAt)} icon='course-boxes__box-right-icon fas fa-calendar-alt'/>
-                                    <CourseBoxesItem title='روش پشتیبانی' txt={support} icon='course-boxes__box-right-icon fas fa-user-alt'/>
-                                    <CourseBoxesItem title='پیش نیاز:' txt='HTML CSS' icon='course-boxes__box-right-icon fas fa-info-circle'/>
-                                    <CourseBoxesItem title='نوع مشاهده:' txt='ضبط شده / آنلاین' icon='course-boxes__box-right-icon fas fa-play'/>
+                                    <CourseBoxesItem title='وضعیت دوره:' txt={isComplete ? 'به اتمام رسیده' : 'در حال برگزاری'} icon='course-boxes__box-right-icon fas fa-graduation-cap' />
+                                    <CourseBoxesItem title='مدت زمان دوره:' txt='19 ساعت' icon='course-boxes__box-right-icon fas fa-clock' />
+                                    <CourseBoxesItem title='آخرین بروزرسانی:' txt={farsiDate(updatedAt)} icon='course-boxes__box-right-icon fas fa-calendar-alt' />
+                                    <CourseBoxesItem title='روش پشتیبانی' txt={support} icon='course-boxes__box-right-icon fas fa-user-alt' />
+                                    <CourseBoxesItem title='پیش نیاز:' txt='HTML CSS' icon='course-boxes__box-right-icon fas fa-info-circle' />
+                                    <CourseBoxesItem title='نوع مشاهده:' txt='ضبط شده / آنلاین' icon='course-boxes__box-right-icon fas fa-play' />
                                 </div>
                             </div>
                             {/* <!-- Finish Course Boxes -->
@@ -75,84 +78,37 @@ export default function MainInfoSection({ isComplete, updatedAt, support, course
                                     <a href="#" className="introduction__btns-item ">دانلود همگانی ویدیوها</a>
                                     <a href="#" className="introduction__btns-item">دانلود همگانی پیوست‌ها</a>
                                 </div>
-
-                                <div className="introduction__topic">
-                                    <div className="accordion" id="accordionExample">
-                                        <div className="accordion-item">
-                                            <h2 className="accordion-header" id="headingOne">
-                                                <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                    معرفی دوره
-                                                </button>
-                                            </h2>
-                                            <div id="collapseOne" className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                                <div className="accordion-body introduction__accordion-body">
+                            {/* accordion */}
+                                {/* <div className="introduction__topic">
+                                    <Accordion defaultActiveKey="0">
+                                        <Accordion.Item eventKey="0" className="accordion">
+                                            <Accordion.Header>جلسات دوره</Accordion.Header>
+                                            {sessions.map((session, index) => (
+                                                <Accordion.Body className="introduction__accordion-body">
                                                     <div className="introduction__accordion-right">
-                                                        <span className="introduction__accordion-count">1</span>
+                                                        <span className="introduction__accordion-count">
+                                                            {index + 1}
+                                                        </span>
                                                         <i className="fab fa-youtube introduction__accordion-icon"></i>
-                                                        <a href="#" className="introduction__accordion-link">
-                                                            معرفی دوره + چرا یادگیری کتابخانه ها ضروری است؟
+                                                        <a
+                                                            href="#"
+                                                            className="introduction__accordion-link"
+                                                        >
+                                                            {session.title}
                                                         </a>
                                                     </div>
                                                     <div className="introduction__accordion-left">
                                                         <span className="introduction__accordion-time">
-                                                            18:34
+                                                            {session.time}
                                                         </span>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="accordion" id="accordionExample2">
-                                        <div className="accordion-item">
-                                            <h2 className="accordion-header" id="headingTwo">
-                                                <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                                    معرفی دوره
-                                                </button>
-                                            </h2>
-                                            <div id="collapseTwo" className="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample2">
-                                                <div className="accordion-body introduction__accordion-body">
-                                                    <div className="introduction__accordion-right">
-                                                        <span className="introduction__accordion-count">1</span>
-                                                        <i className="fab fa-youtube introduction__accordion-icon"></i>
-                                                        <a href="#" className="introduction__accordion-link">
-                                                            معرفی دوره + چرا یادگیری کتابخانه ها ضروری است؟
-                                                        </a>
-                                                    </div>
-                                                    <div className="introduction__accordion-left">
-                                                        <span className="introduction__accordion-time">
-                                                            18:34
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="accordion" id="accordionExample3">
-                                        <div className="accordion-item">
-                                            <h2 className="accordion-header" id="headingThree">
-                                                <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                                                    معرفی دوره
-                                                </button>
-                                            </h2>
-                                            <div id="collapseThree" className="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample3">
-                                                <div className="accordion-body introduction__accordion-body">
-                                                    <div className="introduction__accordion-right">
-                                                        <span className="introduction__accordion-count">1</span>
-                                                        <i className="fab fa-youtube introduction__accordion-icon"></i>
-                                                        <a href="#" className="introduction__accordion-link">
-                                                            معرفی دوره + چرا یادگیری کتابخانه ها ضروری است؟
-                                                        </a>
-                                                    </div>
-                                                    <div className="introduction__accordion-left">
-                                                        <span className="introduction__accordion-time">
-                                                            18:34
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                                </Accordion.Body>
+                                            ))}
+                                        </Accordion.Item>
+                                    </Accordion>
+                                </div>  */}
+                                <Accordion title="جلسات دوره" sessions={sessions}/>
+                                {/* accordion */}
 
                             </div>
 
@@ -182,7 +138,7 @@ export default function MainInfoSection({ isComplete, updatedAt, support, course
                             </div>
 
                             {/* <!-- Finish Teacher Details --> */}
-                            <CommentTextArea/>
+                            <CommentTextArea />
 
                         </div>
                     </div>
@@ -192,8 +148,16 @@ export default function MainInfoSection({ isComplete, updatedAt, support, course
                             <div className="course-info">
                                 <div className="course-info__register">
                                     <span className="course-info__register-title">
-                                        <i className="fas fa-graduation-cap course-info__register-icon"></i>
-                                        دانشجوی دوره هستید
+                                        {
+                                            authContext.isLoggedIn && isUserRegisteredToThisCourse ? (
+                                                <>
+                                                    <i className="fas fa-graduation-cap course-info__register-icon"></i>
+                                                    "دانشجوی دوره هستید"
+                                                </>
+
+                                            ) : ("ثبت نام در دوره")
+                                        }
+
                                     </span>
                                 </div>
                             </div>
@@ -243,7 +207,7 @@ export default function MainInfoSection({ isComplete, updatedAt, support, course
                                 </span>
                                 <span className="course-info__topic-text">
                                     برای مشاهده و یا دانلود دوره روی کلمه
-                                    <a  href="#" className='text-blue font-bold mx-1'>
+                                    <a href="#" className='text-blue font-bold mx-1'>
                                         لینک
                                     </a>
                                     کلیک کنید

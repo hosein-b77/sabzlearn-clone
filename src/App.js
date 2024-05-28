@@ -43,6 +43,8 @@ export default function App() {
       userInfos,
       login,
       logout
+      //value of app.js states are replaced with authContext.js values
+      //isLoggedIn:isLoggedIn, because of magic of js,we can just write isLoggedIn
     }}>
     {router}
     </AuthContext.Provider>

@@ -1,4 +1,4 @@
-import React, { useContext,useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from 'react-router-dom'
 import Footer from "../Components/Footer"
 import Header from '../Components/Header'
@@ -11,7 +11,7 @@ import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
 export default function Login() {
-  const navigate = useNavigate
+  const navigate = useNavigate()
   const authContext = useContext(AuthContext);
   const [isGoogleRecaptchaVerify, setIsGoogleRecaptchaVerify] = useState(false)
   const [formState, onInputHandler] = useForm({
@@ -56,8 +56,19 @@ export default function Login() {
           icon: "success",
           buttons: 'ورود به پنل'
         }).then(value => navigate('/'))
-        console.log(result);
-        authContext.login({}, result.accessToken)
+        fetch(`http://localhost:4000/v1/auth/me`, {
+          headers: {
+            Authorization: `Bearer ${result.accessToken}`,
+          },
+        })
+          .then((res) =>
+            res.json()
+          )
+          .then(info=>{
+            authContext.login(info, result.accessToken)
+            
+          })
+
       })
       .catch((err) => {
         swal({

@@ -48,7 +48,7 @@ export default function CourseInfo() {
             )}
 
             {Object.keys(courseDetails).length > 0 && (comments.length !== 0 && sessions.length!==0)&& (
-                <MainInfoSection comments={comments} sessions={sessions} courseStudentCount={courseDetails.courseStudentsCount} support={courseDetails.support} updatedAt={courseDetails.updatedAt} isComplete={courseDetails.isComplete} />
+                <MainInfoSection comments={comments} sessions={sessions} isUserRegisteredToThisCourse={courseDetails.isUserRegisteredToThisCourse} courseStudentCount={courseDetails.courseStudentsCount} support={courseDetails.support} updatedAt={courseDetails.updatedAt} isComplete={courseDetails.isComplete} />
             )}
 
             
