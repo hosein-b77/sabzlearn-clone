@@ -4,8 +4,34 @@ import CommentTextArea from '../Components/CommentTextArea'
 import farsiDate from '../dateConvertor'
 import AuthContext from '../context/authContext'
 import Accordion from './Accordion'
+import { useParams } from "react-router-dom";
+import swal from 'sweetalert'
 export default function MainInfoSection({ isComplete, updatedAt, support, courseStudentCount, comments, sessions, isUserRegisteredToThisCourse }) {
     const authContext = useContext(AuthContext);
+    const { courseName } = useParams();
+    const submitComment = (newCommentBody) => {
+        const localStorageData = JSON.parse(localStorage.getItem("user"));
+
+        fetch(`http://localhost:4000/v1/comments`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorageData.token}`,
+            },
+            body: JSON.stringify({
+                body: newCommentBody,
+                courseShortName: courseName,
+            }),
+        })
+            .then((res) => res.json())
+            .then((result) => {
+                swal({
+                    title: 'کامنت موردنظر با موفقیت ثبت شد',
+                    icon: 'success',
+                    buttons: 'تایید'
+                })
+            });
+    };
     return (
         <main className="main">
             <div className="container">
@@ -78,7 +104,7 @@ export default function MainInfoSection({ isComplete, updatedAt, support, course
                                     <a href="#" className="introduction__btns-item ">دانلود همگانی ویدیوها</a>
                                     <a href="#" className="introduction__btns-item">دانلود همگانی پیوست‌ها</a>
                                 </div>
-                            {/* accordion */}
+                                {/* accordion */}
                                 {/* <div className="introduction__topic">
                                     <Accordion defaultActiveKey="0">
                                         <Accordion.Item eventKey="0" className="accordion">
@@ -107,7 +133,7 @@ export default function MainInfoSection({ isComplete, updatedAt, support, course
                                         </Accordion.Item>
                                     </Accordion>
                                 </div>  */}
-                                <Accordion title="جلسات دوره" sessions={sessions}/>
+                                <Accordion title="جلسات دوره" sessions={sessions} />
                                 {/* accordion */}
 
                             </div>
@@ -138,7 +164,10 @@ export default function MainInfoSection({ isComplete, updatedAt, support, course
                             </div>
 
                             {/* <!-- Finish Teacher Details --> */}
-                            <CommentTextArea />
+                            <CommentTextArea
+                                comments={comments}
+                                submitComment={submitComment}
+                            />
 
                         </div>
                     </div>
