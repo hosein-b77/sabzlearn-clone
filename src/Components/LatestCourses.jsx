@@ -15,7 +15,7 @@ export default function LatestCourses() {
     return (
         <div className="courses">
             <div className="container">
-                <SectionHeader title="جدیدترین دوره ها" desc="سکوی پرتاپ شما به سمت موفقیت" btnTitle="تمامی دوره ها" btnLink="/courses" />
+                <SectionHeader title="جدیدترین دوره ها" desc="سکوی پرتاپ شما به سمت موفقیت" btnTitle="تمامی دوره ها" btnLink="/courses/1" />
                 <div className='course-wrapper mt-20 grid grid-cols-4 gap-10'>
                     {
                         latestCourse.length>0 && (
