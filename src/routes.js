@@ -10,7 +10,7 @@ const routes = [
    { path: "/", element: <IndexPage /> },
    { path: "/article-info/:articeName", element: <ArticleInfo /> },
    { path: "/course-info/:courseName", element: <CourseInfo /> },
-   { path: "/category-info/:categoryName", element: <Category /> },
+   { path: "/category-info/:categoryName/:page", element: <Category /> },
    { path: "/courses/:page", element: <Courses /> },
    { path: '/login', element: <Login /> },
    { path: '/register', element: <Register /> },

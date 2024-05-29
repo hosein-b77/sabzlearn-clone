@@ -28,7 +28,7 @@ export default function NavBar() {
                                     allMenus.map(mainMenu => {
                                         return (
                                             <li key={mainMenu._id} className="main-header__item">
-                                                <Link to={`/category-info/${mainMenu.href}`} className="main-header__link">
+                                                <Link to={`/category-info/${mainMenu.href}/1`} className="main-header__link">
                                                     {mainMenu.title}
                                                     {mainMenu.submenus.length !== 0 && (
                                                         <i className="fas fa-angle-down main-header__link-icon"></i>

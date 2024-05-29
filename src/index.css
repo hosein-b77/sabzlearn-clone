@@ -536,7 +536,7 @@
   }
 
   .article-card__btn:hover {
-    @apply text-green-sabzlearn bg-green-sabzlearn;
+    @apply text-white bg-green-sabzlearn;
   }
 
   /* Finish Articles Styles */

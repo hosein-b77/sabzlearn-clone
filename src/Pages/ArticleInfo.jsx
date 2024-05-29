@@ -139,7 +139,7 @@ export default function ArticleInfo() {
                 </div>
               </div>
 
-              <CommentTextArea/>
+              {/* <CommentTextArea/> */}
 
             </div>
 

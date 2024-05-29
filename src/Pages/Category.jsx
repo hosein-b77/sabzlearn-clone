@@ -7,6 +7,7 @@ import Footer from '../Components/Footer'
 export default function Category() {
   const {categoryName} = useParams()
   const [catCourses, setCatCourses] = useState([])
+  const [shownCourses, setShownCourses] = useState([]);
   useEffect(()=>{
     fetch(`http://localhost:4000/v1/courses/category/${categoryName}`)
     .then(res=>res.json())
@@ -57,8 +58,8 @@ export default function Category() {
             <div class="container">
               <div class="grid grid-cols-4 gap-10">
                 {
-                  catCourses.length > 0 ? (
-                    catCourses.map(catCourse => {
+                  shownCourses.length > 0 ? (
+                    shownCourses.map(catCourse => {
                       return (
 
                         <CourseBox key={catCourse._id} name={catCourse.name} shortName={catCourse.shortName} creator={catCourse.creator} registers={catCourse.registers} price={catCourse.price} courseAverageScore={catCourse.courseAverageScore} />
@@ -73,7 +74,12 @@ export default function Category() {
               </div>
             </div>
           </div>
-          {catCourses.length > 0 && <Pagination/>}
+          {catCourses.length > 0 && <Pagination
+            items={catCourses}
+            itemsCount={4} // Example: 4 items per page
+            pathname={`/category-info/${categoryName}`}
+            setShownCourses={setShownCourses}
+          />}
 
         </div>
       </section>

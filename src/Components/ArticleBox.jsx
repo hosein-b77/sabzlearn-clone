@@ -1,22 +1,22 @@
 import React from 'react'
-
-export default function ArticleBox({img,title,txt}) {
+import { Link} from 'react-router-dom'
+export default function ArticleBox({img,title,desc,link}) {
   return (
       <div>
           <div className="article-card">
               <div className="article-card__header">
-                  <a href="#" className="article-card__link-img">
+                  <Link to={link} className="article-card__link-img">
                       <img src={img} className="article-card__img" alt="Article Cover" />
-                  </a>
+                  </Link>
               </div>
               <div className="article-card__content">
-                  <a href="#" className="article-card__link">
+                  <Link to={link} className="article-card__link">
                       {title}
-                  </a>
+                  </Link>
                   <p className="article-card__text">
-                      {txt}
+                      {desc}
                   </p>
-                  <a href="#" className="article-card__btn">بیشتر بخوانید</a>
+                  <Link to={link} className="article-card__btn">بیشتر بخوانید</Link>
               </div>
           </div>
       </div>
