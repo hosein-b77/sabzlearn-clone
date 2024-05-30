@@ -1,9 +1,24 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Header from '../Components/Header'
 import Footer from '../Components/Footer'
 import BreadCrumb from '../Components/BreadCrumb'
+import AuthContext from '../context/authContext'
 import CommentTextArea from '../Components/CommentTextArea'
+import { useParams } from 'react-router-dom'
 export default function ArticleInfo() {
+  const [articleInfo, setArticleInfo] = useState([])
+  const authContext =useContext(AuthContext)
+  const {articeName}=useParams()
+  useEffect(() => {
+    fetch(`http://localhost:4000/v1/articles/${articeName}`,{
+      headers:{
+        'Authorization':`Bearer ${authContext.token}`
+      }
+    })
+    .then(res => res.json())
+    .then(data=>setArticleInfo(data))
+    .catch(err=>console.log(err))
+  }, [])
   return (
     <>
       <Header />
@@ -19,12 +34,12 @@ export default function ArticleInfo() {
             <div className="col-start-1 col-end-8">
               <div className="article">
                 <h1 className="article__title">
-                  معرفی بهترین سایت آموزش جاوا اسکریپت [ تجربه محور ] + آموزش رایگان
+                  {articleInfo.title}
                 </h1>
                 <div className="article__header child:flex child:items-center child:gap-x-2">
                   <div className="article-header__category article-header__item">
                     <i className="far fa-folder article-header__icon"></i>
-                    <a href="#" className="article-header__text">جاوا اسکریپت</a>
+                    <a href="#" className="article-header__text">{articleInfo.categoryID._id}</a>
                   </div>
                   <div className="article-header__category article-header__item">
                     <i className="far fa-user article-header__icon"></i>
