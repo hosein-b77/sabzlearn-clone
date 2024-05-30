@@ -3,20 +3,20 @@ import Header from '../Components/Header'
 import Footer from '../Components/Footer'
 import BreadCrumb from '../Components/BreadCrumb'
 import AuthContext from '../context/authContext'
+import { Link } from 'react-router-dom'
 import CommentTextArea from '../Components/CommentTextArea'
 import { useParams } from 'react-router-dom'
+import dateFarsi from '../dateConvertor'
 export default function ArticleInfo() {
   const [articleInfo, setArticleInfo] = useState([])
-  const authContext =useContext(AuthContext)
+  const[categoryID,setCategoryID]=useState({})
+  const[creator,setCreator]=useState({})
+  // const authContext =useContext(AuthContext)
   const {articeName}=useParams()
   useEffect(() => {
-    fetch(`http://localhost:4000/v1/articles/${articeName}`,{
-      headers:{
-        'Authorization':`Bearer ${authContext.token}`
-      }
-    })
+    fetch(`http://localhost:4000/v1/articles/${articeName}`)
     .then(res => res.json())
-    .then(data=>setArticleInfo(data))
+    .then(data=>{setArticleInfo(data);setCategoryID(data.categoryID);setCreator(data.creator)})
     .catch(err=>console.log(err))
   }, [])
   return (
@@ -39,15 +39,15 @@ export default function ArticleInfo() {
                 <div className="article__header child:flex child:items-center child:gap-x-2">
                   <div className="article-header__category article-header__item">
                     <i className="far fa-folder article-header__icon"></i>
-                    <a href="#" className="article-header__text">{articleInfo.categoryID._id}</a>
+                    <Link to={`/category-info/${categoryID.name}/1`} className="article-header__text">{categoryID.title}</Link>
                   </div>
                   <div className="article-header__category article-header__item">
                     <i className="far fa-user article-header__icon"></i>
-                    <span className="article-header__text"> ارسال شده توسط قدیر</span>
+                    <span className="article-header__text"> ارسال شده توسط {creator.name}</span>
                   </div>
                   <div className="article-header__category article-header__item">
                     <i className="far fa-clock article-header__icon"></i>
-                    <span className="article-header__text"> ارسال شده توسط قدیر</span>
+                    <span className="article-header__text"> {dateFarsi(articleInfo.createdAt)}</span>
                   </div>
                   <div className="article-header__category article-header__item">
                     <i className="far fa-eye article-header__icon"></i>
@@ -68,7 +68,7 @@ export default function ArticleInfo() {
                 </div>
 
                 <p className="article__paragraph paragraph">
-                  جاوا اسکریپت یکی از زبان‌های برنامه‌نویسی اصلی حوزه فرانت‌اند است که به واسطه فریم ورک‌های آن می‌توان انواع وب سایت‌ها، اپلیکیشن‌ها و وب اپلیکیشن‌ها را طراحی کرد. به طور کلی بعد از یادگیری html و css معمولاً باید آموزش جاوا اسکریپت را نیز فرا بگیرید. . چرا که این زبان تکمیل‌کننده html و css بوده و در چنین شرایطی موقعیت‌های شغلی بیشتر را در اختیار خواهید داشت و همچنین می‌توانید پروژه‌های گسترده‌تری را انجام دهید. در حال حاضر با وجود منابع رایگان موجود در وب شما به راحتی می‌توانید زبان جاوا اسکریپت را به صورت حرفه‌ای فرا بگیرید. به همین واسطه در ادامه مطلب قصد داریم سایت‌های شاخص آموزش این زبان برنامه‌نویسی در جهان را به شما معرفی کنیم و در آخر بگوییم که بهترین سایت آموزش جاوا اسکریپت کدام است.
+                  {articleInfo.description}
                 </p>
 
                 <div className="article-read">
