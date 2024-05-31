@@ -33,9 +33,9 @@ export default memo(function TopBar() {
                                     ))
                                 ) : ""
                             }
-                            <li className="top-bar__item">
+                            {/* <li className="top-bar__item">
                                 <a href="#" className="top-bar__link">20,000 تومان</a>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                     <div className="top-bar__left">

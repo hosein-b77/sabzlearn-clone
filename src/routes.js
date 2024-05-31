@@ -5,6 +5,7 @@ import IndexPage from './Pages/IndexPage'
 import Courses from './Pages/Courses'
 import Login from "./Pages/Login"
 import Register from "./Pages/Register"
+import Contact from "./Pages/Contact"
 
 const routes = [
    { path: "/", element: <IndexPage /> },
@@ -14,6 +15,7 @@ const routes = [
    { path: "/courses/:page", element: <Courses /> },
    { path: '/login', element: <Login /> },
    { path: '/register', element: <Register /> },
+   { path: '/contact', element: <Contact /> },
 ]
 export default routes
 
