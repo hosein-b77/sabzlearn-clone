@@ -6,6 +6,11 @@ import Courses from './Pages/Courses'
 import Login from "./Pages/Login"
 import Register from "./Pages/Register"
 import Contact from "./Pages/Contact"
+import AdminPanel from "./Pages/AdminPanel/index"
+import Users from './Pages/AdminPanel/Users'
+import AdminCourses from './Pages/AdminPanel/Courses'
+import Menus from './Pages/AdminPanel/Menus'
+import AdminArticles from './Pages/AdminPanel/Articles'
 
 const routes = [
    { path: "/", element: <IndexPage /> },
@@ -16,6 +21,14 @@ const routes = [
    { path: '/login', element: <Login /> },
    { path: '/register', element: <Register /> },
    { path: '/contact', element: <Contact /> },
+   {
+      path: '/p-admin/*', element: <AdminPanel />, children: [
+         { path: 'users', element: <Users /> },
+         { path: 'courses', element: <AdminCourses /> },
+         { path: 'menus', element: <Menus /> },
+         { path: 'articles', element: <AdminArticles /> },
+      ]
+   },
 ]
 export default routes
 
