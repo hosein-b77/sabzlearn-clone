@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 export default function Topbar() {
     const [adminInfo, setAdminInfo] = useState({})
+    const [adminNotifications, setAdminnotifications] = useState([])
 
     useEffect(() => {
         const localStorageData = JSON.parse(localStorage.getItem("user"));
@@ -13,13 +14,19 @@ export default function Topbar() {
             .then(data => {
                 console.log(data);
                 setAdminInfo(data)
+                setAdminnotifications(data.notifications)
             })
     }, []);
     return (
+
         <div className="fixed left-0 right-72 top-0 h-32 bg-slate-100 flex items-center justify-between px-5">
             <div className="topbar-right flex items-center gap-x-8">
                 <input className="p-2 bg-cyan-400 text-slate-500 rounded-lg placeholder:text-white" type="text" placeholder="جستجو ..." />
-                <i className="fa-regular fa-bell"></i>
+
+                {
+                    (adminNotifications.length === 0) ? <i className="fa-regular fa-bell"></i> :
+                        <i className="fa-solid fa-bell notification"></i>
+                }
             </div>
             <div className="topbar-left flex items-center gap-x-16">
                 <div className="name flex items-center gap-x-3">

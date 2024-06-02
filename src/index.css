@@ -2010,6 +2010,26 @@
     height: 100%;
   }
 
+  /* notifications */
+
+  /* end of notifications */
+  .notification {
+    animation: notif 1s alternate ease-in-out infinite;
+    transform-origin: center; /* Ensure the rotation happens around the center */
+  }
+
+  @keyframes notif {
+    0% {
+      transform: rotate(30deg);
+    }
+    50% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(-30deg);
+    }
+  }
+
   /* ============================== end of Admin Panel ========================================= */
 }
 
