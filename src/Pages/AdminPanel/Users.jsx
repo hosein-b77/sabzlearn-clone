@@ -17,6 +17,34 @@ export default function Users() {
       .then(res => res.json())
       .then(data => { console.log(data); setUsersList(data) })
   }
+  const banUser = (userID) => {
+    swal({
+      title: "ایا از بن کاربر مطمعن هستید؟",
+      icon: 'warning',
+      buttons: ['خیر', 'بلی']
+    }).then(result => {
+      if (result) {
+        const localStorageData = JSON.parse(localStorage.getItem("user"));
+        fetch(`http://localhost:4000/v1/users/ban/${userID}`, {
+          method: 'PUT',
+          headers: {
+            Authorization: `Bearer ${localStorageData.token}`,
+          }
+        })
+          .then(res => {
+            if (res.ok) {
+              swal({
+                title: "با موفقیت بن گردید",
+                icon: 'success',
+                buttons: 'ok'
+              })
+            }
+          })
+
+      }
+    })
+
+  }
   const deleteUser = (commentID) => {
     swal({
       title: "ایا از حذف کاربر مطمعن هستید؟",
@@ -49,7 +77,7 @@ export default function Users() {
   }
   return (
     <>
-      <DataTable title="کاربران" data={usersList} deleteUser={deleteUser} />
+      <DataTable title="کاربران" data={usersList} deleteUser={deleteUser} banUser={banUser} />
     </>
   )
 }

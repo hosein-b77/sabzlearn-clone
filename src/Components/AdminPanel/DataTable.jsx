@@ -1,7 +1,7 @@
 import React from 'react';
 
-const DataTable = ({ title, data, deleteUser }) => {
-    
+const DataTable = ({ title, data, deleteUser, banUser }) => {
+
     return (
         <div className="container mx-auto p-4">
             <h2 className="text-xl font-bold text-blue-600 mb-4">لیست {title}</h2>
@@ -31,10 +31,10 @@ const DataTable = ({ title, data, deleteUser }) => {
                                             <button className="bg-blue-500 text-white py-1 px-2 rounded">ویرایش</button>
                                         </td>
                                         <td className="py-2 px-4 border-b">
-                                            <button onClick={()=>deleteUser(user._id)} className="bg-red-500 text-white py-1 px-2 rounded">حذف</button>
+                                            <button onClick={() => deleteUser(user._id)} className="bg-red-500 text-white py-1 px-2 rounded">حذف</button>
                                         </td>
                                         <td className="py-2 px-4 border-b">
-                                            <button className="bg-red-500 text-white py-1 px-2 rounded">بن</button>
+                                            <button onClick={() => banUser(user._id)} className="bg-red-500 text-white py-1 px-2 rounded">بن</button>
                                         </td>
                                     </tr>
                                 )
