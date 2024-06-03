@@ -1,9 +1,23 @@
-import React from "react";
-import { NavLink, useParams } from 'react-router-dom'
-
+import React, { useContext } from "react";
+import { NavLink, useParams, useNavigate } from 'react-router-dom'
+import AuthContext from "../../context/authContext";
+import swal from "sweetalert";
 export default function Sidebar() {
     const route = useParams()
     const activeStyle = "bg-slate-700 block pr-4 py-3 border-l-[6px] border-[#1e83f0] !text-white rounded-r-md"
+    const navigate = useNavigate()
+    const authContext = useContext(AuthContext)
+    const exit = () => {
+        swal({
+            title: 'با موفقیت خارج شدید',
+            icon: 'success',
+            buttons: 'ok',
+        }).then(() => {
+            authContext.logout()
+            navigate('/')
+        }
+        )
+    }
     return (
         <div className="fixed top-0 bottom-0 right-0 w-72 bg-gray-800 pt-8">
             {/* logo */}
@@ -18,6 +32,7 @@ export default function Sidebar() {
                 <li><NavLink to={"users"} className={({ isActive }) => isActive && activeStyle}>کاربران</NavLink></li>
                 <li><NavLink to={""}>کد های تخفیف</NavLink></li>
                 <li><NavLink to={""}>دسته بندی ها</NavLink></li>
+                <li className="text-red-700 cursor-pointer" onClick={exit}>خروج</li>
 
             </ul>
         </div>

@@ -1,12 +1,12 @@
-import React, { useState, useCallback,useEffect } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import { useRoutes } from 'react-router-dom'
 import routes from "./routes"
 import AuthContext from './context/authContext'
 export default function App() {
-  const router =useRoutes(routes)
-  const [isLoggedIn,setIsLoggedIn]=useState(false)
-  const [token,setToken]=useState(false)
-  const [userInfos,setUserInfos]=useState({})
+  const router = useRoutes(routes)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [token, setToken] = useState(false)
+  const [userInfos, setUserInfos] = useState({})
   const login = useCallback((userInfos, token) => {
     setToken(token);
     setIsLoggedIn(true);
@@ -15,6 +15,7 @@ export default function App() {
   }, []); //prevent loop with useCallback
 
   const logout = useCallback(() => {
+    setIsLoggedIn(false)
     setToken(null);
     setUserInfos({});
     localStorage.removeItem("user");
@@ -46,7 +47,7 @@ export default function App() {
       //value of app.js states are replaced with authContext.js values
       //isLoggedIn:isLoggedIn, because of magic of js,we can just write isLoggedIn
     }}>
-    {router}
+      {router}
     </AuthContext.Provider>
   )
 }
