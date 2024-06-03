@@ -12,7 +12,7 @@ import {
   emailValidator,
 } from "../validators/rules";
 import AuthContext from '../context/authContext'
-
+import swal from "sweetalert";
 export default function Register() {
   const authContext = useContext(AuthContext)
   const navigate = useNavigate()
@@ -60,7 +60,19 @@ export default function Register() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body)
     })
-      .then(response => response.json())
+      .then(response => {
+        if (response.ok) {
+          return response.json()
+        } else {
+          if (response.status === 403) {
+            swal({
+              title: 'متاسفانه شما بن شده اید',
+              icon: 'error',
+              buttons: ' ای بابا'
+            })
+          }
+        }
+      })
       .then(data => {
         authContext.login(data.user, data.accessToken)
         navigate('/')
