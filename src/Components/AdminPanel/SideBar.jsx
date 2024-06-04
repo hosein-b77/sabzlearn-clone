@@ -30,8 +30,8 @@ export default function Sidebar() {
                 <li><NavLink to={"menus"} className={({ isActive }) => isActive && activeStyle}>منو ها</NavLink></li>
                 <li><NavLink to={"articles"} className={({ isActive }) => isActive && activeStyle}>مقاله ها</NavLink></li>
                 <li><NavLink to={"users"} className={({ isActive }) => isActive && activeStyle}>کاربران</NavLink></li>
+                <li><NavLink to={"category"}>دسته بندی ها</NavLink></li>
                 <li><NavLink to={""}>کد های تخفیف</NavLink></li>
-                <li><NavLink to={""}>دسته بندی ها</NavLink></li>
                 <li className="text-red-700 cursor-pointer" onClick={exit}>خروج</li>
 
             </ul>

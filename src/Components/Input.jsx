@@ -1,6 +1,5 @@
 import React, { useEffect, useReducer } from 'react'
 import { validator } from '../validators/validator'
-import { useForm } from '../hooks/useForm'
 const inputReducer = (state, action) => {
     switch (action.type) {
         case 'CHANGE': {

@@ -11,6 +11,7 @@ import Users from './Pages/AdminPanel/Users'
 import AdminCourses from './Pages/AdminPanel/Courses'
 import Menus from './Pages/AdminPanel/Menus'
 import AdminArticles from './Pages/AdminPanel/Articles'
+import AdminCategory from './Pages/AdminPanel/Category'
 
 const routes = [
    { path: "/", element: <IndexPage /> },
@@ -27,6 +28,7 @@ const routes = [
          { path: 'courses', element: <AdminCourses /> },
          { path: 'menus', element: <Menus /> },
          { path: 'articles', element: <AdminArticles /> },
+         { path: 'category', element: <AdminCategory /> },
       ]
    },
 ]
