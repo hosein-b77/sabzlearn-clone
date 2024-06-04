@@ -91,6 +91,39 @@ export default function Category() {
                 });
             });
     };
+    const updateCategory = (categoryID) => {
+        const localStorageData = JSON.parse(localStorage.getItem("user"));
+        swal({
+            title: "عنوان جدید دسته بندی را وارد نمایید",
+            content: "input",
+            buttons: "ثبت عنوان جدید",
+        }).then((result) => {
+            if (result.trim().length) {
+                fetch(`http://localhost:4000/v1/category/${categoryID}`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${localStorageData.token}`,
+                    },
+                    body: JSON.stringify({
+                        title: result
+                        // name:   because of swal1 we cant use 2 input,so this is cause of error
+                    })
+                })
+                    .then((res) => res.json())
+                    .then((result) => {
+                        console.log(result);
+                        swal({
+                            title: "دسته بندی مورد نظر با موفقیت ویرایش شد",
+                            icon: "success",
+                            buttons: "اوکی",
+                        }).then(() => {
+                            getAllCategory();
+                        });
+                    });
+            }
+        });
+    };
 
     return (
         <>
@@ -129,7 +162,7 @@ export default function Category() {
                                     <td className="py-2 px-4 border-b">{index + 1}</td>
                                     <td className="py-2 px-4 border-b">{category.title}</td>
                                     <td className="py-2 px-4 border-b">
-                                        <button className="bg-blue-500 text-white py-1 px-2 rounded">ویرایش</button>
+                                        <button onClick={() => updateCategory(category._id)} className="bg-blue-500 text-white py-1 px-2 rounded">ویرایش</button>
                                     </td>
                                     <td className="py-2 px-4 border-b">
                                         <button onClick={() => deleteCategory(category._id)} className="bg-red-500 text-white py-1 px-2 rounded">حذف</button>
