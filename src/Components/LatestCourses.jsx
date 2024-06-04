@@ -22,7 +22,7 @@ export default function LatestCourses() {
                             latestCourse.map(lCourse=>{
                                 return(
                                 
-                                    <CourseBox key={lCourse._id} name={lCourse.name} shortName={lCourse.shortName} creator={lCourse.creator} registers={lCourse.registers} price={lCourse.price} courseAverageScore={lCourse.courseAverageScore}/>
+                                    <CourseBox key={lCourse._id} name={lCourse.name} shortName={lCourse.shortName} creator={lCourse.creator} registers={lCourse.registers} price={lCourse.price} courseAverageScore={lCourse.courseAverageScore} cover={lCourse.cover}/>
                                 )
                             })
                         )

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import ImageLoader from './ImageLoader'
 import { renderStars } from '../utils'
-export default function CourseBox({ name, shortName, creator, registers, price, courseAverageScore }) {
+export default function CourseBox({ cover,name, shortName, creator, registers, price, courseAverageScore }) {
     const [showLoader, setShowLoader] = useState(true)
     return (
 
@@ -12,7 +12,7 @@ export default function CourseBox({ name, shortName, creator, registers, price, 
             }
 
             <Link to={`/course-info/${shortName}`}>
-                <img onLoad={() => setShowLoader(false)} src="https://picsum.photos/260/150" alt="Course img" className="course-box__img" />
+                <img onLoad={() => setShowLoader(false)} src={`http://localhost:4000/courses/covers/${cover}`} alt="Course img" className="course-box__img" />
 
             </Link>
 
