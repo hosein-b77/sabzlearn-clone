@@ -12,6 +12,7 @@ import AdminCourses from './Pages/AdminPanel/Courses'
 import Menus from './Pages/AdminPanel/Menus'
 import AdminArticles from './Pages/AdminPanel/Articles'
 import AdminCategory from './Pages/AdminPanel/Category'
+import AdminContacts from './Pages/AdminPanel/AdminContacts'
 
 const routes = [
    { path: "/", element: <IndexPage /> },
@@ -29,6 +30,7 @@ const routes = [
          { path: 'menus', element: <Menus /> },
          { path: 'articles', element: <AdminArticles /> },
          { path: 'category', element: <AdminCategory /> },
+         { path: 'contacts', element: <AdminContacts /> },
       ]
    },
 ]
