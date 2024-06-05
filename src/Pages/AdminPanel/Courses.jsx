@@ -13,7 +13,7 @@ import {
 
 export default function Courses() {
   const [allCourses, setAllCourses] = useState([])
-  const [courseCategory, setCourseCategory] = useState("");
+  const [courseCategory, setCourseCategory] = useState("-1");
   const [categories, setCategories] = useState([]);
   const [courseStatus, setCourseStatus] = useState("start");
   const [courseCover, setCourseCover] = useState({});
@@ -52,7 +52,7 @@ export default function Courses() {
         setCategories(allCategories);
       });
   }, [])
- 
+
   function getAllCourses() {
     fetch('http://localhost:4000/v1/courses')
       .then(res => res.json())
@@ -107,24 +107,32 @@ export default function Courses() {
     formData.append('status', courseStatus)
     formData.append('cover', courseCover)
 
-    fetch(`http://localhost:4000/v1/courses`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${localStorageData.token}`
-      },
-      body: formData
-    }).then(res => {
-      console.log(res);
-      if (res.ok) {
-        swal({
-          title: 'دوره جدید با موفقیت اضافه شد',
-          icon: 'success',
-          buttons: 'اوکی'
-        }).then(() => {
-          getAllCourses()
-        })
-      }
-    })
+    if (courseCategory === "-1") {
+      swal({
+        icon: 'error',
+        buttons: "ok",
+        title: 'لطفا دسته بندی را انتخاب کنید'
+      })
+    } else {
+      fetch(`http://localhost:4000/v1/courses`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${localStorageData.token}`
+        },
+        body: formData
+      }).then(res => {
+        console.log(res);
+        if (res.ok) {
+          swal({
+            title: 'دوره جدید با موفقیت اضافه شد',
+            icon: 'success',
+            buttons: 'اوکی'
+          }).then(() => {
+            getAllCourses()
+          })
+        }
+      })
+    }
   };
   return (
     <>
@@ -211,6 +219,7 @@ export default function Courses() {
               <div class="number input">
                 <label class="input-title">دسته‌بندی دوره</label>
                 <select onChange={selectCategory}>
+                  <option value="-1">لطفا دسته‌بندی را انتخاب کنید</option>
                   {categories.map((category) => (
                     <option key={category._id} value={category._id}>{category.title}</option>
                   ))}
