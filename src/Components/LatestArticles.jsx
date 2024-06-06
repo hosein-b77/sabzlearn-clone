@@ -29,7 +29,7 @@ export default function LatestArticles() {
                         articles.length > 0 && (articles.filter(course => course.publish === 1).slice(0, 3).map(article => {
                             return (
                                 // <ArticleBox key={article._id} img={article.cover} title={article.title} txt={article.description} link={`/article-info/${article.shortName}`}  />
-                                <ArticleBox key={article._id} img={'images/blog/1.jpg'} title={article.title} desc={article.description} link={`/article-info/${article.shortName}`} />
+                                <ArticleBox key={article._id} img={`http://localhost:4000/courses/covers/${article.cover}`} title={article.title} desc={article.description} link={`/article-info/${article.shortName}`} />
                             )
                         })
 
