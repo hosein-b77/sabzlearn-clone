@@ -2,7 +2,7 @@
 import React, { memo, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-export default memo(function TopBar() {
+export default memo(function TopBar({ phone, email }) {
     const [topbarLinks, setTopbarLinks] = useState(null);
 
     useEffect(() => {
@@ -41,13 +41,13 @@ export default memo(function TopBar() {
                     <div className="top-bar__left">
                         <div className="top-bar__email">
                             <a href="#" className="top-bar__email-text top-bar__link">
-                                sabzlearn@gmail.com
+                                {email}
                             </a>
                             <i className="fas fa-envelope top-bar__email-icon"></i>
                         </div>
                         <div className="top-bar__phone">
                             <a href="#" className="top-bar__phone-text top-bar__link">
-                                09921558293
+                                {phone}
                             </a>
                             <i className="fas fa-phone top-bar__phone-icon"></i>
                         </div>

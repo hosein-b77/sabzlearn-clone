@@ -1,10 +1,10 @@
 import React from 'react'
 import NavBar from './NavBar'
 import TopBar from './TopBar'
-export default function Header() {
+export default function Header({phone,email}) {
     return (
         <header className="header">
-            <TopBar />
+            <TopBar phone={phone} email={email} />
             <NavBar />
         </header>
     )
