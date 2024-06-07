@@ -1253,22 +1253,35 @@
     margin: 0 auto;
   }
 
-  .article-section {
+  #article-section {
     margin: 5rem 0;
   }
 
-  .article-section__title {
+  /* .article-section__title {
+    font-size: 2.4rem;
+    color: #008c25;
+    font-weight: bold;
+    line-height: 1.2;
+  } */
+  #article-section h3 {
     font-size: 2.4rem;
     color: #008c25;
     font-weight: bold;
     line-height: 1.2;
   }
 
-  .article-section__text {
+  /* .article-section__text {
+    margin: 2rem 0;
+  } */
+  #article-section p {
     margin: 2rem 0;
   }
 
-  .article-section__img {
+  /* .article-section__img {
+    display: block;
+    margin: 0 auto;
+  } */
+  #article-section img {
     display: block;
     margin: 0 auto;
   }

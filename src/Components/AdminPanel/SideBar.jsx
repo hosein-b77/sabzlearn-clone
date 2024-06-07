@@ -27,6 +27,7 @@ export default function Sidebar() {
             <ul className="child:child:text-slate-400 space-y-7 mt-10 pr-3  child:py-2 ">
                 <li><NavLink to={"/p-admin"} className={`${route['*'] === "" ? activeStyle : ""}`}>صفحه اصلی</NavLink></li>
                 <li><NavLink to={"courses"} className={({ isActive }) => isActive && activeStyle}>دوره ها</NavLink></li>
+                <li><NavLink to={"sessions"} className={({ isActive }) => isActive && activeStyle}>جلسه ها</NavLink></li>
                 <li><NavLink to={"menus"} className={({ isActive }) => isActive && activeStyle}>منو ها</NavLink></li>
                 <li><NavLink to={"articles"} className={({ isActive }) => isActive && activeStyle}>مقاله ها</NavLink></li>
                 <li><NavLink to={"users"} className={({ isActive }) => isActive && activeStyle}>کاربران</NavLink></li>

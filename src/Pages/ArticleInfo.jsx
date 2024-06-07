@@ -7,17 +7,18 @@ import { Link } from 'react-router-dom'
 import CommentTextArea from '../Components/CommentTextArea'
 import { useParams } from 'react-router-dom'
 import dateFarsi from '../dateConvertor'
+import DOMPurify from 'dompurify'
 export default function ArticleInfo() {
   const [articleInfo, setArticleInfo] = useState([])
-  const[categoryID,setCategoryID]=useState({})
-  const[creator,setCreator]=useState({})
+  const [categoryID, setCategoryID] = useState({})
+  const [creator, setCreator] = useState({})
   // const authContext =useContext(AuthContext)
-  const {articeName}=useParams()
+  const { articeName } = useParams()
   useEffect(() => {
     fetch(`http://localhost:4000/v1/articles/${articeName}`)
-    .then(res => res.json())
-    .then(data=>{setArticleInfo(data);setCategoryID(data.categoryID);setCreator(data.creator)})
-    .catch(err=>console.log(err))
+      .then(res => res.json())
+      .then(data => { setArticleInfo(data); setCategoryID(data.categoryID); setCreator(data.creator) })
+      .catch(err => console.log(err))
   }, [])
   return (
     <>
@@ -54,7 +55,7 @@ export default function ArticleInfo() {
                     <span className="article-header__text">  2.14k بازدید</span>
                   </div>
                 </div>
-                <img src="/images/blog/1.jpg" alt="Article Cover" className="article__banner" />
+                <img src={`http://localhost:4000/courses/covers/${articleInfo.cover}`} alt="Article Cover" className="article__banner" />
 
                 <div className="article__score">
                   <div className="article__score-icons flex">
@@ -85,9 +86,10 @@ export default function ArticleInfo() {
                     </li>
                   </ul>
                 </div>
+                <div id="article-section" dangerouslySetInnerHTML={{__html:DOMPurify.sanitize(articleInfo.body)}}>
+                </div>
 
-                <img src="/images/blog/2.jpg" alt="Article Image" className="article__seconadary-banner" />
-                <div className="article-section">
+                {/* <div className="article-section">
                   <h2 className="article-section__title">
                     معرفی بهترین سایت ‌های آموزش جاوا اسکریپت:
                   </h2>
@@ -112,7 +114,7 @@ export default function ArticleInfo() {
                     توجه داشته باشید که تمام وب سایت‌هایی که به عنوان بهترین سایت آموزش جاوا اسکریپت در ادامه معرفی می‌کنیم، بین‌المللی هستند و منابع موجود در آن‌ها به زبان انگلیسی است. در نتیجه شما باید یا تسلط متوسط و حداقلی به زبان انگلیسی داشته باشید و یا اینکه با استفاده از گوگل ترنسلیت منابع موجود را ترجمه کرده و از آن‌ها استفاده کنید. به همین دلیل در انتهای محتوا به شما خواهیم گفت که راه آسان دیگری برای یادگیری زبان جاوا اسکریپت وجود دارد که شما بتوانید به واسطه آن به صورت رایگان و به زبان فارسی این زبان را یاد بگیرید.
                   </p>
                   <img src="/images/blog/3.jpg" alt="article body img" className="article-section__img" />
-                </div>
+                </div> */}
 
                 <div className="article-social-media">
                   <span className="article-social-media__text">اشتراک گذاری :</span>
