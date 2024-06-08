@@ -15,6 +15,7 @@ import AdminCategory from './Pages/AdminPanel/Category'
 import AdminContacts from './Pages/AdminPanel/AdminContacts'
 import Sessions from './Pages/AdminPanel/Sessions'
 import Comments from './Pages/AdminPanel/Comments'
+import Offs from './Pages/AdminPanel/Offs'
 
 const routes = [
    { path: "/", element: <IndexPage /> },
@@ -35,6 +36,7 @@ const routes = [
          { path: 'contacts', element: <AdminContacts /> },
          { path: 'sessions', element: <Sessions /> },
          { path: 'comments', element: <Comments /> },
+         { path: 'offs', element: <Offs /> },
       ]
    },
 ]
