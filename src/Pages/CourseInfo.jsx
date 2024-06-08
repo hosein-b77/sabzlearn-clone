@@ -32,7 +32,7 @@ export default function CourseInfo() {
         <>
             <Header />
             {
-                console.log('courseDetails:::',courseDetails)
+                console.log('courseDetails:::', courseDetails)
             }
             {Object.keys(courseDetails).length > 0 && (
                 <BreadCrumb links={[
@@ -42,16 +42,16 @@ export default function CourseInfo() {
                 ]}
                 />
             )}
-            
+
             {Object.keys(courseDetails).length > 0 && (
                 <CourseInfoMain coursesDetail={courseDetails} />
             )}
 
-            {Object.keys(courseDetails).length > 0 && (comments.length !== 0 && sessions.length!==0)&& (
+            {Object.keys(courseDetails).length > 0 && (
                 <MainInfoSection comments={comments} sessions={sessions} isUserRegisteredToThisCourse={courseDetails.isUserRegisteredToThisCourse} courseStudentCount={courseDetails.courseStudentsCount} support={courseDetails.support} updatedAt={courseDetails.updatedAt} isComplete={courseDetails.isComplete} />
             )}
 
-            
+
             <Footer />
         </>
     )

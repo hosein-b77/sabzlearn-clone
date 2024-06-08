@@ -1,17 +1,28 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, memo } from 'react';
 
-export default function LandingCount({ count }) {
-    const [counter, setCounter] = useState(0)
+const LandingCount = memo(({ count }) => {
+    const [counter, setCounter] = useState(0);
+
     useEffect(() => {
-        let interval = setInterval(() => {
-            setCounter(preval => preval + 1)
-        }, 0.0001)
-        if (counter === count) {
-            clearInterval(interval)
+        if (counter < count) {
+            const interval = setInterval(() => {
+                setCounter(prevCounter => {
+                    if (prevCounter < count) {
+                        return prevCounter + 1;
+                    } else {
+                        clearInterval(interval);
+                        return prevCounter;
+                    }
+                });
+            }, 1); // Set an appropriate delay time
+            return () => clearInterval(interval);
         }
-        return () => clearInterval(interval) //this line is for cleanUp in React and prevent memory leak because in every render,new interval created and old one still remained 
-    }, [counter])
+    }, [counter, count]);
+
     return (
         <span className="landing-status__count">{counter}</span>
-    )
-}
+    );
+});
+
+export default LandingCount;
+

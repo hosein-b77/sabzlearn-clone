@@ -133,7 +133,8 @@ export default function MainInfoSection({ isComplete, updatedAt, support, course
                                         </Accordion.Item>
                                     </Accordion>
                                 </div>  */}
-                                <Accordion title="جلسات دوره" sessions={sessions} />
+                                <Accordion title="جلسات دوره" sessions={sessions} isUserRegisteredToThisCourse={isUserRegisteredToThisCourse} />
+                                
                                 {/* accordion */}
 
                             </div>

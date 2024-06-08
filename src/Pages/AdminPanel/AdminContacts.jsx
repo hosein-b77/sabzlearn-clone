@@ -4,20 +4,23 @@ import swal from 'sweetalert'
 export default function AdminContacts() {
     const [allContacts, setAllContact] = useState([])
     useEffect(() => {
+        getAllContacts()
+    }, [])
+    function getAllContacts() {
         fetch('http://localhost:4000/v1/contact')
             .then(res => res.json())
             .then(data => {
                 console.log('all contacts: ', data)
                 setAllContact(data)
             })
-    }, [])
+    }
     const seeMsg = (body) => {
         swal({
             title: 'پیغام کاربر',
             icon: 'success',
             text: body,
             buttons: 'مشاهده گردید',
-        
+
         })
     }
     const sendAnwserToUser = (contactEmail) => {
@@ -46,7 +49,7 @@ export default function AdminContacts() {
                 if (res.ok) {
                     return res.json()
                 }
-            }).then(result => console.log(result))
+            }).then(result => { console.log(result); getAllContacts() })
         })
     }
     return (
@@ -56,7 +59,7 @@ export default function AdminContacts() {
                 {allContacts.length > 0 && (allContacts.map((contact, index) => {
                     return (
                         <tr key={contact._id} className='text-center'>
-                            <td className="py-2 px-4 border-b">{index + 1}</td>
+                            <td className={`py-2 px-4 border-b ${contact.answer ? 'bg-green-500' : 'bg-red-500'}`}>{index + 1}</td>
                             <td className="py-2 px-4 border-b">{contact.name}</td>
                             <td className="py-2 px-4 border-b">{contact.phone}</td>
                             <td className="py-2 px-4 border-b">{contact.email}</td>
@@ -64,7 +67,7 @@ export default function AdminContacts() {
                                 <button onClick={() => seeMsg(contact.body)} className="bg-blue-500 text-white py-1 px-2 rounded">مشاهده</button>
                             </td>
                             <td className="py-2 px-4 border-b">
-                                <button onClick={()=>sendAnwserToUser(contact.email)} className="bg-blue-500 text-white py-1 px-2 rounded">پاسخ</button>
+                                <button onClick={() => sendAnwserToUser(contact.email)} className="bg-blue-500 text-white py-1 px-2 rounded">پاسخ</button>
                             </td>
                             <td className="py-2 px-4 border-b">
                                 <button className="bg-red-500 text-white py-1 px-2 rounded">حذف</button>
@@ -74,9 +77,6 @@ export default function AdminContacts() {
                 })
                 )
                 }
-
-
-
 
             </DataTable>
         </>
