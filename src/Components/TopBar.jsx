@@ -17,6 +17,7 @@ export default memo(function TopBar({ phone, email }) {
     };
 
     return (
+
         <div className="top-bar">
             <div className="container-fluid">
                 <div className="top-bar__content">
@@ -33,9 +34,7 @@ export default memo(function TopBar({ phone, email }) {
                                     ))
                                 ) : ""
                             }
-                            {/* <li className="top-bar__item">
-                                <a href="#" className="top-bar__link">20,000 تومان</a>
-                            </li> */}
+                           
                         </ul>
                     </div>
                     <div className="top-bar__left">
