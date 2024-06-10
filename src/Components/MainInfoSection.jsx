@@ -6,7 +6,7 @@ import AuthContext from '../context/authContext'
 import Accordion from './Accordion'
 import { useParams } from "react-router-dom";
 import swal from 'sweetalert'
-export default function MainInfoSection({ getInfoFromServer,price, courseID, isComplete, updatedAt, support, courseStudentCount, comments, sessions, isUserRegisteredToThisCourse }) {
+export default function MainInfoSection({ getInfoFromServer, price, courseID, isComplete, updatedAt, support, courseStudentCount, comments, sessions, isUserRegisteredToThisCourse }) {
     const authContext = useContext(AuthContext);
     const { courseName } = useParams();
     const submitComment = (newCommentBody) => {
@@ -32,7 +32,16 @@ export default function MainInfoSection({ getInfoFromServer,price, courseID, isC
                 })
             });
     };
-
+    const fetchRegister = (priceOfCourse) => {
+        fetch(`http://localhost:4000/v1/courses/${courseID}/register`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${JSON.parse(localStorage.getItem('user')).token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ price: priceOfCourse })
+        })
+    }
     const courseRegister = () => {
         if (price === 0) {
             swal({
@@ -40,32 +49,85 @@ export default function MainInfoSection({ getInfoFromServer,price, courseID, isC
                 title: 'ایا از ثبت نام مطمعن هستید؟',
                 buttons: ['خیر', 'بله']
             }).then(answer => (
-                fetch(`http://localhost:4000/v1/courses/${courseID}/register`, {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${JSON.parse(localStorage.getItem('user')).token}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ price:price })
-                })
+                fetchRegister(price)
                     .then(res => {
-                        if(res.ok){
+                        if (res.ok) {
                             swal(
                                 {
-                                    buttons:'اوکی',
-                                    title:'ثبت نام با موفقیت انجام شد',
-                                    icon:'success'
+                                    buttons: 'اوکی',
+                                    title: 'ثبت نام با موفقیت انجام شد',
+                                    icon: 'success'
                                 }
-                            ).then(()=>getInfoFromServer())
-                        }else{
-                        swal({
-                            buttons: 'تلاش دوباره',
-                            title: 'مشکلی در ثبت نام بوجود اومده',
-                            icon: 'error'
-                        })
-                    }
+                            ).then(() => getInfoFromServer())
+                        } else {
+                            swal({
+                                buttons: 'تلاش دوباره',
+                                title: 'مشکلی در ثبت نام بوجود اومده',
+                                icon: 'error'
+                            })
+                        }
                     })
             ))
+        } else {
+            swal({
+                title: 'ایا از ثبت نام مطمعن هستید؟',
+                buttons: ['خیر', 'بله']
+            }).then(res => {
+                if (res) {
+                    swal({
+                        title: 'ایا کد تخفیف دارید؟',
+                        buttons: ['ثبت نام بدون کد تخفیف', 'ثبت نام با کد تخفیف'],
+                        content: 'input'
+                    }).then(code => {
+                        if (code === null) {
+                            fetchRegister(price)
+                                .then(res => {
+                                    if (res.ok) {
+                                        swal({
+                                            icon: 'success',
+                                            title: 'ثبت نام شدید'
+                                            , buttons: 'شروع دوره'
+
+                                        })
+                                    } else {
+                                        swal({
+                                            icon: 'error',
+                                            title: 'خطا در ثبت نام '
+                                            , buttons: 'تلاش مجدد'
+                                        })
+                                    }
+                                })
+                        } else {
+                            fetch(`http://localhost:4000/v1/offs/${code}`, {
+                                method: 'POST',
+                                headers: {
+                                    'Authorization': `Bearer ${JSON.parse(localStorage.getItem('user')).token}`,
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({ course: courseID })
+                            }).then(res => {
+                                res.json()
+                            // }).then(result => {
+                            //         console.log(result)
+                            //         // fetchRegister(price - price * result.percent)
+                            //         //     .then(res => res.json())
+                            //         //     .then(data => {
+                            //         //         console.log(data)
+                            //         //         swal({
+                            //         //             title: 'با موفقیت ثبت نام شده'
+                            //         //             , buttons: 'شروع دوره',
+                            //         //             icon: 'success'
+                            //         //         })
+                            //         //     })
+                            //     })
+                                .catch(err=>{
+                                    console.log(err)
+                                })
+
+                        }
+                    })
+                }
+            })
         }
 
     }
