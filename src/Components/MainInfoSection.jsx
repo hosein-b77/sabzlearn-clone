@@ -6,7 +6,7 @@ import AuthContext from '../context/authContext'
 import Accordion from './Accordion'
 import { useParams } from "react-router-dom";
 import swal from 'sweetalert'
-export default function MainInfoSection({ isComplete, updatedAt, support, courseStudentCount, comments, sessions, isUserRegisteredToThisCourse }) {
+export default function MainInfoSection({ getInfoFromServer,price, courseID, isComplete, updatedAt, support, courseStudentCount, comments, sessions, isUserRegisteredToThisCourse }) {
     const authContext = useContext(AuthContext);
     const { courseName } = useParams();
     const submitComment = (newCommentBody) => {
@@ -32,6 +32,43 @@ export default function MainInfoSection({ isComplete, updatedAt, support, course
                 })
             });
     };
+
+    const courseRegister = () => {
+        if (price === 0) {
+            swal({
+
+                title: 'ایا از ثبت نام مطمعن هستید؟',
+                buttons: ['خیر', 'بله']
+            }).then(answer => (
+                fetch(`http://localhost:4000/v1/courses/${courseID}/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${JSON.parse(localStorage.getItem('user')).token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ price:price })
+                })
+                    .then(res => {
+                        if(res.ok){
+                            swal(
+                                {
+                                    buttons:'اوکی',
+                                    title:'ثبت نام با موفقیت انجام شد',
+                                    icon:'success'
+                                }
+                            ).then(()=>getInfoFromServer())
+                        }else{
+                        swal({
+                            buttons: 'تلاش دوباره',
+                            title: 'مشکلی در ثبت نام بوجود اومده',
+                            icon: 'error'
+                        })
+                    }
+                    })
+            ))
+        }
+
+    }
     return (
         <main className="main">
             <div className="container">
@@ -134,7 +171,7 @@ export default function MainInfoSection({ isComplete, updatedAt, support, course
                                     </Accordion>
                                 </div>  */}
                                 <Accordion title="جلسات دوره" sessions={sessions} isUserRegisteredToThisCourse={isUserRegisteredToThisCourse} />
-                                
+
                                 {/* accordion */}
 
                             </div>
@@ -176,7 +213,8 @@ export default function MainInfoSection({ isComplete, updatedAt, support, course
                     <div className="col-start-9 col-end-12">
                         <div className="courses-info">
                             <div className="course-info">
-                                <div className="course-info__register">
+                                <div className={`course-info__register ${isUserRegisteredToThisCourse ? 'pointer-events-none' : 'cursor-pointer'}`} onClick={courseRegister}>
+                                    {console.log('session: ', sessions)}
                                     <span className="course-info__register-title">
                                         {
                                             authContext.isLoggedIn && isUserRegisteredToThisCourse ? (

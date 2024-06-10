@@ -12,6 +12,10 @@ export default function CourseInfo() {
     const [courseDetails, setCourseDetails] = useState({})
 
     useEffect(() => {
+
+        getInfoFromServer()
+    }, [])
+    function getInfoFromServer() {
         const localStorageData = JSON.parse(localStorage.getItem('user'))
         fetch(`http://localhost:4000/v1/courses/${courseName}`, {
             headers: {
@@ -27,7 +31,7 @@ export default function CourseInfo() {
             }
             )
             .catch(err => console.log(err))
-    }, [])
+    }
     return (
         <>
             <Header />
@@ -48,7 +52,7 @@ export default function CourseInfo() {
             )}
 
             {Object.keys(courseDetails).length > 0 && (
-                <MainInfoSection comments={comments} sessions={sessions} isUserRegisteredToThisCourse={courseDetails.isUserRegisteredToThisCourse} courseStudentCount={courseDetails.courseStudentsCount} support={courseDetails.support} updatedAt={courseDetails.updatedAt} isComplete={courseDetails.isComplete} />
+                <MainInfoSection getInfoFromServer={getInfoFromServer} price={courseDetails.price} courseID={courseDetails._id} comments={comments} sessions={sessions} isUserRegisteredToThisCourse={courseDetails.isUserRegisteredToThisCourse} courseStudentCount={courseDetails.courseStudentsCount} support={courseDetails.support} updatedAt={courseDetails.updatedAt} isComplete={courseDetails.isComplete} />
             )}
 
 
