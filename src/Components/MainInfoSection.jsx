@@ -33,104 +33,106 @@ export default function MainInfoSection({ getInfoFromServer, price, courseID, is
             });
     };
     const fetchRegister = (priceOfCourse) => {
-        fetch(`http://localhost:4000/v1/courses/${courseID}/register`, {
+        return (fetch(`http://localhost:4000/v1/courses/${courseID}/register`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('user')).token}`,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ price: priceOfCourse })
-        })
+        }))
     }
+
     const courseRegister = () => {
         if (price === 0) {
             swal({
-
                 title: 'ایا از ثبت نام مطمعن هستید؟',
                 buttons: ['خیر', 'بله']
-            }).then(answer => (
-                fetchRegister(price)
-                    .then(res => {
-                        if (res.ok) {
-                            swal(
-                                {
+            }).then(answer => {
+                if (answer) {
+                    fetchRegister(price)
+                        .then(res => {
+                            if (res.ok) {
+                                swal({
                                     buttons: 'اوکی',
                                     title: 'ثبت نام با موفقیت انجام شد',
                                     icon: 'success'
-                                }
-                            ).then(() => getInfoFromServer())
-                        } else {
-                            swal({
-                                buttons: 'تلاش دوباره',
-                                title: 'مشکلی در ثبت نام بوجود اومده',
-                                icon: 'error'
-                            })
-                        }
-                    })
-            ))
-        } else {
+                                }).then(() => getInfoFromServer());
+                            } else {
+                                swal({
+                                    buttons: 'تلاش دوباره',
+                                    title: 'مشکلی در ثبت نام بوجود اومده',
+                                    icon: 'error'
+                                });
+                            }
+                        });
+                }
+            });
+        } //price == 0
+        else {
             swal({
                 title: 'ایا از ثبت نام مطمعن هستید؟',
                 buttons: ['خیر', 'بله']
-            }).then(res => {
-                if (res) {
+            }).then(answer => {
+                if (answer) {
                     swal({
-                        title: 'ایا کد تخفیف دارید؟',
-                        buttons: ['ثبت نام بدون کد تخفیف', 'ثبت نام با کد تخفیف'],
-                        content: 'input'
+                        title: 'ایا از کد تخفیف استفاده می کنید؟',
+                        content: 'input',
+                        buttons: ['خیر', 'بله']
                     }).then(code => {
-                        if (code === null) {
-                            fetchRegister(price)
-                                .then(res => {
-                                    if (res.ok) {
-                                        swal({
-                                            icon: 'success',
-                                            title: 'ثبت نام شدید'
-                                            , buttons: 'شروع دوره'
-
-                                        })
-                                    } else {
-                                        swal({
-                                            icon: 'error',
-                                            title: 'خطا در ثبت نام '
-                                            , buttons: 'تلاش مجدد'
-                                        })
-                                    }
-                                })
-                        } else {
+                        if (code) {
                             fetch(`http://localhost:4000/v1/offs/${code}`, {
                                 method: 'POST',
                                 headers: {
                                     'Authorization': `Bearer ${JSON.parse(localStorage.getItem('user')).token}`,
-                                    'Content-Type': 'application/json'
+                                    'Content-Type': 'application/json',
                                 },
                                 body: JSON.stringify({ course: courseID })
                             }).then(res => {
+                                if (res.status === 404) {
+                                    swal({
+                                        title: 'چنین کد تخفیفی وجود ندارد',
+                                        icon: 'error',
+                                        buttons: 'اوکی'
+                                    })
+                                } else if (res.status === 409) {
+                                    swal({
+                                        title: 'این کد تخفیف قبلا استفاده شده است',
+                                        icon: 'error',
+                                        buttons: 'اوکی'
+                                    })
+                                } else {
+                                    return res.json()
+                                }
+                            }).then(data => {
+                                fetchRegister(price - (price * data.percent / 100))
+                                    .then(() => {
+                                        getInfoFromServer()
+
+                                    })
+                            })
+                                .catch(err => console.log(err))
+
+
+                        } else {
+                            fetchRegister(price).then((res) =>
                                 res.json()
-                            // }).then(result => {
-                            //         console.log(result)
-                            //         // fetchRegister(price - price * result.percent)
-                            //         //     .then(res => res.json())
-                            //         //     .then(data => {
-                            //         //         console.log(data)
-                            //         //         swal({
-                            //         //             title: 'با موفقیت ثبت نام شده'
-                            //         //             , buttons: 'شروع دوره',
-                            //         //             icon: 'success'
-                            //         //         })
-                            //         //     })
-                            //     })
-                                .catch(err=>{
-                                    console.log(err)
-                                })
+                            ).then(data => {
+                                console.log(data)
+                                swal({
+                                    buttons: 'اوکی',
+                                    title: 'ثبت نام با موفقیت انجام شد',
+                                    icon: 'success'
+                                }).then(() => getInfoFromServer());
+                            })
 
                         }
-                    })
-                }
+                    })//code
+                }//answer
             })
-        }
+        } // price !=0
+    }//courseRegister
 
-    }
     return (
         <main className="main">
             <div className="container">
