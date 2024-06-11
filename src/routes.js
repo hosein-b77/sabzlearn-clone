@@ -18,6 +18,7 @@ import Comments from './Pages/AdminPanel/Comments'
 import Offs from './Pages/AdminPanel/Offs'
 import PAdminIndex from './Pages/AdminPanel/PAdminIndex'
 import PAdminPrivate from './Components/PAdminPrivate/PAdminPrivate'
+import Discounts from './Pages/AdminPanel/Discounts'
 const routes = [
    { path: "/", element: <IndexPage /> },
    { path: "/article-info/:articeName", element: <ArticleInfo /> },
@@ -41,6 +42,7 @@ const routes = [
          { path: 'sessions', element: <Sessions /> },
          { path: 'comments', element: <Comments /> },
          { path: 'offs', element: <Offs /> },
+         { path: 'discounts', element: <Discounts /> },
       ]
    },
 ]

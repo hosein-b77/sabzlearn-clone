@@ -2,11 +2,20 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import ImageLoader from './ImageLoader'
 import { renderStars } from '../utils'
-export default function CourseBox({ cover,name, shortName, creator, registers, price, courseAverageScore }) {
+export default function CourseBox({ discount, cover, name, shortName, creator, registers, price, courseAverageScore }) {
     const [showLoader, setShowLoader] = useState(true)
     return (
 
-        <div className="course-box relative">
+        <div className="course-box relative group">
+            {
+                (discount && price !== 0) && (
+                    <div className='absolute transition-transform -rotate-[30deg] group-hover:rotate-0 -top-3 left-0 bg-green-500 text-white size-14 rounded-lg flex-center'>
+                        %{
+                            discount
+                        }
+                    </div>
+                )
+            }
             {
                 showLoader && <ImageLoader />
             }
@@ -43,7 +52,14 @@ export default function CourseBox({ cover,name, shortName, creator, registers, p
                         <i className="fas fa-users course-box__users-icon"></i>
                         <span className="course-box__users-text">{registers}</span>
                     </div>
-                    <span className="course-box__price">{price === 0 ? 'رایگان' : price.toLocaleString()}</span>
+                    <div className='space-x-3'>
+                        <span className={`course-box__price ${(discount && price !== 0) && 'line-through !text-red-500 !text-2xl'}`}>{price === 0 ? 'رایگان' : price.toLocaleString()}</span>
+                        {
+                            (discount && price !== 0) && <span className={`course-box__price !text-green-sabzlearn`}>{ (price - price *discount /100).toLocaleString()}</span>
+                            
+                        }
+                    </div>
+
                 </div>
             </div>
 
