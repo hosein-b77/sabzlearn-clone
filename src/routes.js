@@ -17,6 +17,7 @@ import Sessions from './Pages/AdminPanel/Sessions'
 import Comments from './Pages/AdminPanel/Comments'
 import Offs from './Pages/AdminPanel/Offs'
 import PAdminIndex from './Pages/AdminPanel/PAdminIndex'
+import PAdminPrivate from './Components/PAdminPrivate/PAdminPrivate'
 const routes = [
    { path: "/", element: <IndexPage /> },
    { path: "/article-info/:articeName", element: <ArticleInfo /> },
@@ -27,7 +28,9 @@ const routes = [
    { path: '/register', element: <Register /> },
    { path: '/contact', element: <Contact /> },
    {
-      path: '/p-admin/*', element: <AdminPanel />, children: [
+      path: '/p-admin/*', element: <PAdminPrivate><AdminPanel /></PAdminPrivate>,
+
+      children: [
          { path: '', element: <PAdminIndex /> },
          { path: 'users', element: <Users /> },
          { path: 'courses', element: <AdminCourses /> },
